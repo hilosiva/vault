@@ -1,0 +1,42 @@
+---
+// Astro
+// import { Picture } from "astro:assets";
+
+// Layout
+import Layout from "@layouts/Layout.astro";
+---
+
+<Layout title="Astro" description="ページ紹介文">
+  <main>
+    <div class="container">
+      <h1 data-font="fluid-[20,80]" data-text="center">Astro</h1>
+    </div>
+  </main>
+</Layout>
+
+<style lang="scss">
+  /* @custom-media --xxl (width >= 1440px); */
+
+  .container {
+    --offset: var(--offset-md);
+  }
+
+  $color: red;
+  main {
+    font-size: fluid(32px 40px);
+    margin-block-start: 10rem;
+    text-align: start;
+
+    @media (--lg) {
+      background: $color;
+    }
+
+    @media (--xl) {
+      background: #400;
+    }
+
+    h1 {
+      font-size: fluid(32px 40px);
+    }
+  }
+</style>

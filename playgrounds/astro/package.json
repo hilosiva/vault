@@ -1,0 +1,23 @@
+{
+  "name": "astro-playground",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "vaultcss": "workspace:^",
+    "vite-plugin-vaultcss": "workspace:^"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4",
+    "astro": "^4.16.6",
+    "postcss": "^8.4.41",
+    "sass-embedded": "^1.83.4",
+    "typescript": "^5.6.3"
+  }
+}

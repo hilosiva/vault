@@ -1,0 +1,96 @@
+@layer settings, base, layouts, vendors, components, utilities;
+@import "vaultcss/index.css";
+
+
+
+body {
+  /* height: 100vh; 高さを調整 */
+
+  /* &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image: repeating-linear-gradient(to bottom, #e485b5, #e485b5 0.5px, transparent 0.5px, transparent 1lh);
+  } */
+
+  /* --grid-size: 4px;
+  --grid-color: #f39cc7;
+
+  background-image: repeating-linear-gradient(to bottom, var(--grid-color), var(--grid-color) 0.5px, transparent 0.5px, transparent var(--grid-size)),
+    repeating-linear-gradient(to right, var(--grid-color), var(--grid-color) 0.5px, transparent 0.5px, transparent var(--grid-size)); */
+
+  /* background-image: repeating-linear-gradient(to bottom, #e485b5, #e485b5 0.5px, transparent 0.5px, transparent 1lh); */
+
+  &::before {
+    --grid-size: 4px;
+    --grid-color: #f39cc7;
+
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1000;
+    /* height: 2000vh; */
+    background-image: repeating-linear-gradient(to bottom, var(--grid-color), var(--grid-color) 0.5px, transparent 0.5px, transparent var(--grid-size)),
+      repeating-linear-gradient(to right, var(--grid-color), var(--grid-color) 0.5px, transparent 0.5px, transparent var(--grid-size));
+    /* background-image: repeating-linear-gradient(to bottom, #e485b5, #e485b5 0.5px, transparent 0.5px, transparent 1lh); */
+  }
+}
+
+h2 {
+  /* font-size: var(--font-3xl);
+  margin-block-start: 2rlh;
+  line-height: 3.5rlh; */
+  /* line-height: 1.3125; */
+  /* line-height: var(--line-height-3xl); */
+}
+h3 {
+  /* font-size: var(--font-2xl);
+  line-height: 2.5rlh; */
+  /* line-height: 1.25; */
+}
+h4 {
+  /* font-size: var(--font-xl);
+  line-height: 1.5rlh; */
+  /* line-height: 1.25; */
+}
+h5 {
+  /* font-size: var(--font-lg); */
+  /* line-height: 1rlh; */
+  /* line-height: 1.25; */
+}
+h6 {
+  /* font-size: var(--font-md);
+  line-height: 1rlh; */
+  /* line-height: 1.25; */
+}
+
+.small {
+  font-size: var(--font-2xs);
+  /* line-height: 1rlh; */
+  line-height: 1.49999999998;
+}
+
+.grid {
+  display: block grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.grid__item {
+  display: block grid;
+  grid-template-rows: subgrid;
+  grid-row: span 3;
+}
+
+
+body {
+
+  background: #0c0;
+  font-size: fluid(1.5rem 2rem);
+
+  @media (--lg) {
+     background: #000;
+     color: #fff;
+    font-size: fluid(1.5rem 2rem);
+  }
+}

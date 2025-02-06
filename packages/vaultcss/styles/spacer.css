@@ -1,0 +1,12 @@
+:where(.spacer) {
+  --p-start: 0;
+  --p-end: 0;
+  --p: var(--p-start) var(--p-end);
+  --m-start: 0;
+  --m-end: 0;
+  --m: var(--m-start) var(--m-end);
+
+  display: block flow-root;
+  padding-block: var(--p);
+  margin-block: var(--m);
+}

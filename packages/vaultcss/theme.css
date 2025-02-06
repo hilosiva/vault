@@ -1,0 +1,165 @@
+@theme {
+  /* Prefix */
+  --prefix: ;
+
+  /* Default */
+  --default-fluid-viewport-min: 375;
+  --default-fluid-viewport-max: 1920;
+  --default-container-offset: var(--offset-md);
+  --default-font-size: var(--font-md);
+  --default-leading: var(--leading-normal);
+
+  /* Break Points */
+  --breakpoint-2xs: 375px;
+  --breakpoint-xs: 414px;
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1440px;
+
+  /* tool */
+  --to-rem: calc(1rem / var(--font-base));
+  --to-rlh: calc(1 / (var(--font-base) * var(--default-leading)));
+
+  /* Design Width */
+  --design-width-sm: 375;
+  --design-width-md: 768;
+  --design-width-lg: 1440;
+
+  /* Color */
+  --color-main: #36b08b;
+  --color-dark: #212121;
+  --color-white: #fff;
+  --color-black: #000;
+
+  /* Font Family */
+  --font-gothic: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "BIZ UDPGothic", "Meiryo", sans-serif;
+  --font-sans: "Helvetica Neue", "Arial", system-ui, sans-serif;
+
+  /* Font Size */
+  --font-base: 16;
+  --font-ratio: 8;
+  --font-3xs: calc(var(--font-base) * var(--font-ratio) / 12 * var(--to-rem));
+  --font-2xs: calc(var(--font-base) * var(--font-ratio) / 11 * var(--to-rem));
+  --font-xs: calc(var(--font-base) * var(--font-ratio) / 10 * var(--to-rem));
+  --font-sm: calc(var(--font-base) * var(--font-ratio) / 9 * var(--to-rem));
+  --font-md: calc(var(--font-base) * var(--font-ratio) / 8 * var(--to-rem)); /* 16 */
+  --font-lg: calc(var(--font-base) * var(--font-ratio) / 7 * var(--to-rem));
+  --font-xl: calc(var(--font-base) * var(--font-ratio) / 6 * var(--to-rem));
+  --font-2xl: calc(var(--font-base) * var(--font-ratio) / 5 * var(--to-rem));
+  --font-3xl: calc(var(--font-base) * var(--font-ratio) / 4 * var(--to-rem));
+  --font-4xl: calc(var(--font-base) * var(--font-ratio) / 3 * var(--to-rem));
+  --font-5xl: calc(var(--font-base) * var(--font-ratio) / 2 * var(--to-rem));
+  --font-6xl: calc(var(--font-base) * var(--font-ratio) / 1 * var(--to-rem));
+
+  /* Font Size */
+  --font-fluid-xs: fluid(10.667, 12.8);
+  --font-fluid-sm: fluid(14.222, 16);
+  --font-fluid-md: fluid(16, 18.286);
+  --font-fluid-lg: fluid(18, 21.333);
+  --font-fluid-xl: fluid(25.6, 32);
+  --font-fluid-2xl: fluid(32, 42.667);
+  --font-fluid-3xl: fluid(42.667, 64);
+
+  /* Line Height */
+  --leading-base: 4;
+  --leading-3xs: calc(var(--leading-base) * 2 * var(--to-rem));
+  --leading-2xs: calc(var(--leading-base) * 3 * var(--to-rem));
+  --leading-xs: calc(var(--leading-base) * 4 * var(--to-rem));
+  --leading-sm: calc(var(--leading-base) * 5 * var(--to-rem));
+  --leading-md: calc(var(--leading-base) * 6 * var(--to-rem));
+  --leading-lg: calc(var(--leading-base) * 7 * var(--to-rem));
+  --leading-xl: calc(var(--leading-base) * 8 * var(--to-rem));
+  --leading-2xl: calc(var(--leading-base) * 9 * var(--to-rem));
+  --leading-3xl: calc(var(--leading-base) * 10 * var(--to-rem));
+  --leading-4xl: calc(var(--leading-base) * 11 * var(--to-rem));
+  --leading-none: 1;
+  --leading-tight: 1.25;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.75;
+  --leading-loose: 2;
+
+  /* Letter Spacing */
+  --tracking-tigher: -0.05em;
+  --tracking-tight: -0.025em;
+  --tracking-normal: normal;
+  --tracking-wide: 0.025em;
+  --tracking-wider: 0.05em;
+  --tracking-widest: 0.1em;
+
+  /* contents Size  */
+  --contents-sm: 640px;
+  --contents-md: 768px;
+  --contents-lg: 1024px;
+  --contents-xl: 1280px;
+  --contents-2xl: 1440px;
+
+  /*  Offset */
+  --offset-xs: 1.5vi;
+  --offset-sm: 2.5vi;
+  --offset-md: 5vi;
+  --offset-lg: 10vi;
+
+  /* Space */
+  --space-base: 8;
+  --space-2xs: calc(var(--space-base) * var(--to-rem));
+  --space-xs: calc(var(--space-base) * 2 * var(--to-rem));
+  --space-sm: calc(var(--space-base) * 3 * var(--to-rem));
+  --space-md: calc(var(--space-base) * 5 * var(--to-rem));
+  --space-lg: calc(var(--space-base) * 8 * var(--to-rem));
+  --space-xl: calc(var(--space-base) * 13 * var(--to-rem));
+  --space-2xl: calc(var(--space-base) * 21 * var(--to-rem));
+
+  /* Radius */
+  --radius-sm: 1rem;
+  --radius-md: 2rem;
+  --radius-lg: 2.5rem;
+  --radius-full: 50%;
+
+  /* Arrow */
+  --arrow-width: 12%;
+  --arrow-prev: polygon(
+    100% var(--arrow-width),
+    calc(100% - var(--arrow-width)) 0,
+    calc(50% - var(--arrow-width)) 50%,
+    calc(100% - var(--arrow-width)) 100%,
+    100% calc(100% - var(--arrow-width)),
+    calc(50% + var(--arrow-width)) 50%,
+    100% var(--arrow-width)
+  );
+  --arrow-next: polygon(
+    0 var(--arrow-width),
+    var(--arrow-width) 0,
+    calc(50% + var(--arrow-width)) 50%,
+    var(--arrow-width) 100%,
+    0 calc(100% - var(--arrow-width)),
+    calc(50% - var(--arrow-width)) 50%,
+    0 var(--arrow-width)
+  );
+
+  /* Transition & Animation */
+  --duration-fast: 0.3s;
+  --duration-normal: 0.6s;
+  --duration-slow: 1.2s;
+  --ease-in-sine: cubic-bezier(0.12, 0, 0.39, 0);
+  --ease-out-sine: cubic-bezier(0.61, 1, 0.88, 1);
+  --ease-in-out-sine: cubic-bezier(0.37, 0, 0.63, 1);
+  --ease-in-quart: cubic-bezier(0.5, 0, 0.75, 0);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+  --ease-in-expo: cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-expo: cubic-bezier(0.87, 0, 0.13, 1);
+
+  /* Viewport */
+  --viewport: var(--design-width-sm);
+
+  @media (--md) {
+    --viewport: var(--design-width-md);
+  }
+
+  @media (--lg) {
+    --viewport: var(--design-width-lg);
+  }
+}

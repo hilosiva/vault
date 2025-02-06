@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Olex</title>
+  <link rel="stylesheet" href="/src/index.scss" />
+  <script type="module" src="/src/main.ts"></script>
+</head>
+<body>
+  <header>
+    <div data-container>
+      <nav data-p="block-small">
+        <ul data-flex data-place="center" data-gap="small">
+          <li>リスト1</li>
+          <li>リスト2</li>
+          <li>リスト3</li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <div data-container>
+      <div data-m="block-xlarge 2xs:block-small">
+        <h1 data-text="keep line-tight pkna" data-font="fluid-[64,128]">Olex<wbr />俺流のフレームワーク</h1>
+      </div>
+
+      <div data-over data-bg="main">
+        <p>test</p>
+      </div>
+      <section>
+        <h2 data-font="sans 5xlarge 500" data-text="letter-wide line-4xlarge">Overview</h2>
+        <div data-m="block-start-medium">
+          <div data-grid="cols-1 lg:cols-3" data-gap="col-medium">
+            <div class="" data-grid-item="rows-subgrid row-3" data-gap="row-2xsmall">
+              <h3 data-font="sans 2xlarge" data-text="line-tight">Heading3</h3>
+              <figure data-aspect="v-golden" data-size="" data-bg="main" data-order="first"></figure>
+              <p data-text="balance letter-wider pkna">ここにテキストを配置すると、どうなる？ここにテキストを配置するとどうなる？ここにテキストを配置するとどうなる？</p>
+            </div>
+            <div class="" data-grid-item="rows-subgrid row-3" data-gap="row-2xsmall">
+              <h3 data-font="sans 2xlarge" data-text="line-tight">Heading3</h3>
+              <figure data-aspect="v-golden" data-size="" data-bg="main" data-order="first"></figure>
+              <p data-text="balance letter-wider pkna">ここにテキストを配置すると、どうなる？ここにテキストを配置するとどうなる？ここにテキストを配置するとどうなる？</p>
+            </div>
+            <div class="" data-grid-item="rows-subgrid row-3" data-gap="row-2xsmall">
+              <h3 data-font="sans 2xlarge" data-text="line-tight">Heading3</h3>
+              <figure data-aspect="v-golden" data-size="" data-bg="main" data-order="first"></figure>
+              <p data-text="balance letter-wider pkna">ここにテキストを配置すると、どうなる？ここにテキストを配置するとどうなる？ここにテキストを配置するとどうなる？</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+  <div data-container>
+    <div data-flex data-place="lg:end" data-gap="small">
+      <p>罫線のテスト</p>
+      <p>罫線のテスト</p>
+    </div>
+    <div data-grid="cols-3" data-gap="small">
+      <p>罫線のテスト1</p>
+      <p data-order="-2">罫線のテスト2</p>
+      <p>罫線のテスト3</p>
+    </div>
+
+    <div data-m="top-2xsmall">
+      <p data-text="tb">罫線のテスト</p>
+      <p data-visually-hidden>罫線のテストはどれ</p>
+    </div>
+
+    <div data-m="top-large">
+      <div data-grid="cols-2">
+        <div>
+          <p data-text="balance line-loose letter-wider" data-font="700 pkna gothic">
+            ここにテキストを配置すると、どうなる？ここにテキストを配置するとどうなる？ここにテキストを配置するとどうなる？
+          </p>
+        </div>
+        <div>
+          <p data-text="center balance line-loose" data-font="fluid-[12,40]">This is a pen. I'm pen too. Tmorrow never knows</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h2 data-text="rl balance">見出しは2行になる</h2>
+  <div data-grid data-place="center" data-size="block-start-[500px]">
+    <p data-bg="main">せんた</p>
+  </div>
+
+  <div data-size="inline-[20vi]" data-aspect="square" data-bg="main"></div>
+
+  <div data-position="fixed" data-inset="small" data-z-index="[-5]">position</div>
+
+  <div data-p="inline-medium" data-m="2 top-3 inline-4">
+    <div data-m="top-small">
+      <div data-grid="cols-4">
+        <div data-grid-item="rows-subgrid row-3">
+          <p data-grid-item>サブグリ</p>
+          <p>サブグリ<br />サブグリ<br />サブグリ<br />グリグリ</p>
+          <p>サブグリ</p>
+        </div>
+        <div data-grid-item="rows-subgrid row-3">
+          <p>サブグリ</p>
+          <p>サブグリ</p>
+          <p>サブグリ</p>
+        </div>
+        <div data-grid-item="rows-subgrid row-3">
+          <p>サブグリ</p>
+          <p>サブグリ</p>
+          <p>サブグリ</p>
+        </div>
+      </div>
+      <div class="grid">
+        <div class="grid__item">
+          <p>サブグリ</p>
+          <p>サブグリ<br />サブグリ<br />サブグリ<br />グリグリ</p>
+          <p>サブグリ</p>
+        </div>
+        <div class="grid__item">
+          <p>サブグリ</p>
+          <p>サブグリ</p>
+          <p>サブグリ</p>
+        </div>
+        <div class="grid__item">
+          <p>サブグリ</p>
+          <p>サブグリ</p>
+          <p>サブグリ</p>
+        </div>
+      </div>
+    </div>
+    <div data-m="top-small">
+      <h3>Heading3<br />これが見出し</h3>
+      <div data-space="y-2">
+        <p>罫線のテスト</p>
+        <p>罫線のテスト</p>
+        <p>罫線のテスト</p>
+        <p>罫線のテスト</p>
+      </div>
+    </div>
+    <div data-m="top-small">
+      <h4>Heading4<br />これが見出し</h4>
+      <p>罫線のテスト</p>
+      <p>罫線のテスト</p>
+    </div>
+    <div data-m="top-small">
+      <h5>Heading5<br />これが見出し</h5>
+      <p>罫線のテスト</p>
+      <p>罫線のテスト</p>
+    </div>
+    <div data-m="top-large">
+      <h6>Heading6<br />これが見出し</h6>
+      <p>罫線のテスト</p>
+      <p>罫線のテスト</p>
+    </div>
+    <div data-m="top-small">
+      <p class="small">スモール</p>
+      <p>罫線のテスト</p>
+      <p>罫線のテスト</p>
+    </div>
+  </div>
+
+  <!-- <header data-container="4xlarge fluid-[20,40,500,1000] lg:none">
+      <div data-flex="nowrap inline" data-m="top-small">
+        <h1>Hello</h1>
+      </div>
+    </header>
+    <main>
+      <div data-container="e-4xlarge s-[10vi] xl:e-fluid-[24,40]" style="background-color: #333">
+        <div data-grid="cols-3 " data-gap="fluid-[20,40]" data-m="y-fluid-[20,40]">
+          <div>test</div>
+          <div>test</div>
+          <div>test</div>
+          <div>test</div>
+        </div>
+      </div>
+      <div data-container="s-[20vi]">
+        <div data-grid="cols-3">
+          <div>test</div>
+          <div>test</div>
+          <div>test</div>
+          <div>test</div>
+        </div>
+        <div style="background-color: aqua" data-over>
+          <p>てすと</p>
+        </div>
+      </div>
+    </main> -->
+</body>
+</html>

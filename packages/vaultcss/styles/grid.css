@@ -1,0 +1,10 @@
+:where(.grid) {
+  --grid-fit: repeat(auto-fit, minmax(min(var(--grid-min, 400px), 100%), 1fr));
+  --grid-fill: repeat(auto-fill, minmax(min(var(--grid-min, 400px), 100%), 1fr));
+  --grid-cols: none;
+  --gap: 0;
+
+  display: block grid;
+  grid-template-columns: var(--grid-cols);
+  gap: var(--gap);
+}

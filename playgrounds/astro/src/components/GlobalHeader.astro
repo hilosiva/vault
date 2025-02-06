@@ -1,0 +1,43 @@
+---
+import GlobalNavLink from "./GlobalNavLink.astro";
+
+let Element = "p";
+
+const { pathname } = Astro.url;
+
+if (pathname === "/") {
+  Element = "h1";
+}
+
+const navLists = [
+  {
+    name: "sample",
+    url: `/sample/`,
+  },
+];
+---
+
+<header class="header">
+  <div class="header__inner" data-container data-flex>
+    <Element>
+      <a href="/" class="logo"> Astro </a>
+    </Element>
+    <nav class="header__nav">
+      <div id="globalNav" class="globalNav">
+        <ul class="globalNav__list">
+          {
+            navLists.map((item) => (
+              <li class="globalNav__item">
+                <GlobalNavLink class="global__link" href={item.url}>
+                  {item.name}
+                </GlobalNavLink>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<style></style>

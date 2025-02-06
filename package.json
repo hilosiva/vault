@@ -1,0 +1,39 @@
+{
+  "name": "vault-root",
+  "version": "0.1.2",
+  "private": true,
+  "scripts": {
+    "build": "turbo build --filter=!./playgrounds/*",
+    "dev": "turbo dev --filter=!./playgrounds/*",
+    "vite": "pnpm run --filter=vite-playground dev",
+    "vite-build": "pnpm run --filter=vite-playground build",
+    "vite-preview": "pnpm run --filter=vite-playground preview",
+    "astro": "pnpm run --filter=astro-playground dev",
+    "astro-build": "pnpm run --filter=astro-playground build",
+    "astro-preview": "pnpm run --filter=astro-playground preview",
+    "test": "turbo run test",
+    "publish:main": "pnpm --filter=!./playgrounds/* publish",
+    "publish:beta": "pnpm --filter=!./playgrounds/* publish --tag beta"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hilosiva/vaultcss"
+  },
+  "browserslist": [
+    "defaults"
+  ],
+  "keywords": [],
+  "author": "Shibata Hironori",
+  "license": "MIT",
+  "description": "",
+  "devDependencies": {
+    "@types/node": "^22.2.0",
+    "postcss": "*",
+    "prettier": "^3.3.3",
+    "tsup": "^8.2.4",
+    "turbo": "^2.0.12",
+    "typescript": "^5.5.4",
+    "vitest": "^2.0.5"
+  },
+  "packageManager": "pnpm@9.7.0"
+}

@@ -1,0 +1,20 @@
+{
+  "name": "vite-playground",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "vaultcss": "workspace:^",
+    "vite-plugin-vaultcss": "workspace:^"
+  },
+  "devDependencies": {
+    "postcss": "^8.4.41",
+    "sass-embedded": "^1.83.4",
+    "vite": "^6.0.11"
+  }
+}

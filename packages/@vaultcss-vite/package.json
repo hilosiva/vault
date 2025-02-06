@@ -1,0 +1,46 @@
+{
+  "name": "vite-plugin-vaultcss",
+  "version": "0.1.2",
+  "description": "Unlock the Power of CSS",
+  "license": "MIT",
+  "author": "Shibata Hironori",
+  "keywords": [
+    "Vite",
+    "CSS",
+    "CSS Framework"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hilosiva/vault.git",
+    "directory": "packages/vaultcss-vite"
+  },
+  "bugs": "https://github.com/hilosiva/vault/issues",
+  "homepage": "https://github.com/hilosiva/vault",
+  "scripts": {
+    "build": "tsup-node",
+    "dev": "pnpm run build -- --watch"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "files": [
+    "dist/"
+  ],
+  "publishConfig": {
+    "provenance": false,
+    "access": "public"
+  },
+  "dependencies": {
+    "vaultcss": "workspace:^"
+  },
+  "devDependencies": {
+    "@types/node": "^22.2.0",
+    "vite": "^5.4.0"
+  },
+  "peerDependencies": {
+    "vite": "^5.4.0"
+  }
+}
