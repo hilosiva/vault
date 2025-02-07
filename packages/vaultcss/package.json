@@ -1,12 +1,12 @@
 {
   "name": "vaultcss",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Unlock the Power of CSS",
   "license": "MIT",
   "author": "Shibata Hironori",
   "keywords": [
     "CSS",
-    "CSS Framework"
+    "CSS Library"
   ],
   "repository": {
     "type": "git",

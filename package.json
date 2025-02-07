@@ -1,6 +1,6 @@
 {
   "name": "vault-root",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "private": true,
   "scripts": {
     "build": "turbo build --filter=!./playgrounds/*",
@@ -12,6 +12,9 @@
     "astro-build": "pnpm run --filter=astro-playground build",
     "astro-preview": "pnpm run --filter=astro-playground preview",
     "test": "turbo run test",
+    "version:patch": "pnpm version patch --filter='packages/*' --force --no-git-tag-version",
+    "version:minor": "pnpm version minor --filter='packages/*' --force --no-git-tag-version",
+    "version:major": "pnpm version major --filter='packages/*' --force --no-git-tag-version",
     "publish:main": "pnpm --filter=!./playgrounds/* publish",
     "publish:beta": "pnpm --filter=!./playgrounds/* publish --tag beta"
   },

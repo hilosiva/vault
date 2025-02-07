@@ -1,0 +1,62 @@
+{
+  "name": "vaultjs",
+  "version": "0.1.5",
+  "description": "Unlock the Power of JavaScript",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "license": "MIT",
+  "author": "Shibata Hironori",
+  "keywords": [
+    "JavaScript",
+    "JavaScript Library"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hilosiva/vault.git",
+    "directory": "packages/vaultjs"
+  },
+  "bugs": "https://github.com/hilosiva/vault/issues",
+  "homepage": "https://github.com/hilosiva/vault",
+  "scripts": {
+    "build": "tsup-node --env.NODE_ENV production",
+    "dev": "tsup-node --env.NODE_ENV development --watch",
+    "test": "vitest"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "provenance": false,
+    "access": "public",
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "require": "./dist/index.cjs",
+        "import": "./dist/index.js"
+      },
+      "./package.json": "./package.json"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@types/node": "^22.2.0",
+    "tsup": "^8.2.4",
+    "typescript": "^5.5.4",
+    "vitest": "^2.0.5"
+  },
+  "dependencies": {
+    "@types/jsdom": "^21.1.7",
+    "dompurify": "^3.2.4",
+    "jsdom": "^26.0.0",
+    "lenis": "^1.1.20"
+  }
+}
