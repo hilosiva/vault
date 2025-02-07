@@ -1,5 +1,5 @@
 {
-  "name": "vaultjs",
+  "name": "vaultscript",
   "version": "0.1.5",
   "description": "Unlock the Power of JavaScript",
   "type": "module",
@@ -14,7 +14,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/hilosiva/vault.git",
-    "directory": "packages/vaultjs"
+    "directory": "packages/vaultscript"
   },
   "bugs": "https://github.com/hilosiva/vault/issues",
   "homepage": "https://github.com/hilosiva/vault",

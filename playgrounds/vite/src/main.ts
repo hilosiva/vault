@@ -1,4 +1,4 @@
-import { MomentumScroll, Loading, Toggle } from "vaultjs";
+import { MomentumScroll, Loading, Toggle } from "vaultscript";
 
 new Loading();
 new MomentumScroll();

@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "vaultjs": "workspace:^",
+    "vaultscript": "workspace:^",
     "vaultcss": "workspace:^",
     "vite-plugin-vaultcss": "workspace:^"
   },
