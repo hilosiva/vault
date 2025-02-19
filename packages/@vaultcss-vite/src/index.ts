@@ -1,10 +1,10 @@
 import path from "path";
 import { VaultCss } from "vaultcss";
-import type { PluginOptions } from "vaultcss";
+import type { PluginOptions as vaultOptions } from "vaultcss";
 import type { Plugin, ResolvedConfig } from "vite";
 
 
-export default function vaultcss(options?: Partial<PluginOptions>): Plugin[] {
+export default function vaultcss(options: vaultOptions = {}): Plugin[] {
   let vault: VaultCss | null = null;
   let config: ResolvedConfig | null = null
   let minify = false;

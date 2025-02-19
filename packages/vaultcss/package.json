@@ -1,6 +1,6 @@
 {
   "name": "vaultcss",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Unlock the Power of CSS",
   "license": "MIT",
   "author": "Shibata Hironori",
@@ -84,7 +84,7 @@
     "@hilosiva/oreset": "^3.0.2",
     "browserslist": "^4.24.4",
     "lightningcss": "^1.29.1",
-    "lightningcss-plugin-fluid": "^0.0.3",
+    "lightningcss-plugin-fluid": "^0.0.4",
     "prettier": "^3.3.3"
   }
 }

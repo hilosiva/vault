@@ -3,12 +3,12 @@
   --torem: calc(1rem / 16);
   --torlh: calc(1rlh / 16);
   --tovi: calc(100vi / var(--viewport));
-  --tovi-sm: calc(100vi / var(--design-widith-sm));
-  --tovi-md: calc(100vi / var(--design-widith-md, 768));
-  --tovi-lg: calc(100vi / var(--design-widith-lg));
-  --tovw-sm: calc(100vw / var(--design-widith-sm));
-  --tovw-md: calc(100vw / var(--design-widith-md, 768));
-  --tovw-lg: calc(100vw / var(--design-widith-lg));
+  --tovi-sm: calc(100vi / var(--design-width-sm));
+  --tovi-md: calc(100vi / var(--design-width-md, 768));
+  --tovi-lg: calc(100vi / var(--design-width-lg));
+  --tovw-sm: calc(100vw / var(--design-width-sm));
+  --tovw-md: calc(100vw / var(--design-width-md, 768));
+  --tovw-lg: calc(100vw / var(--design-width-lg));
   --toremvw: calc((var(--torem) * 0.5) + (var(--viewport) * 0.5));
   --toremvi-sm: calc((var(--torem) * 0.5) + (var(--tovi-sm) * 0.5));
   --toremvi-md: calc((var(--torem) * 0.5) + (var(--tovi-md) * 0.5));
@@ -20,9 +20,9 @@
   --max-viewport: 1440;
 
   /* Design */
-  --design-widith-sm: 375;
-  /* --design-widith-md: 768; */
-  --design-widith-lg: 1440;
+  --design-width-sm: 375;
+  /* --design-width-md: 768; */
+  --design-width-lg: 1440;
 
   /* Color */
   --color-blue-50: #1e1a07;
@@ -199,13 +199,13 @@
   --ease-in-out-back: cubic-bezier(0.68, -0.6, 0.32, 1.6);
 
   /* Viewport  */
-  --viewport: var(--design-widith-sm);
+  --viewport: var(--design-width-sm);
 
   @media (--md) {
-    --viewport: var(--design-widith-md, var(--design-widith-sm));
+    --viewport: var(--design-width-md, var(--design-width-sm));
   }
 
   @media (--lg) {
-    --viewport: var(--design-widith-lg);
+    --viewport: var(--design-width-lg);
   }
 }

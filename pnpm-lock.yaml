@@ -4,6 +4,12 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+catalogs:
+  default:
+    '@biomejs/biome':
+      specifier: ^1.9.4
+      version: 1.9.4
+
 importers:
 
   .:
@@ -55,8 +61,8 @@ importers:
         specifier: ^1.29.1
         version: 1.29.1
       lightningcss-plugin-fluid:
-        specifier: ^0.0.3
-        version: 0.0.3
+        specifier: ^0.0.4
+        version: 0.0.4
       prettier:
         specifier: ^3.3.3
         version: 3.4.2
@@ -90,7 +96,7 @@ importers:
         version: 1.1.20
     devDependencies:
       '@biomejs/biome':
-        specifier: ^1.9.4
+        specifier: 'catalog:'
         version: 1.9.4
       '@types/node':
         specifier: ^22.2.0
@@ -1821,8 +1827,8 @@ packages:
     cpu: [x64]
     os: [linux]
 
-  lightningcss-plugin-fluid@0.0.3:
-    resolution: {integrity: sha512-ZMH1PeemugYlOgR3UM3JudYcdem7F0c3wEcfN2fQ+Lq1yz086jFWZKjAjs8UbnnhrUk57EbuvQHAqv+hZC7QgQ==}
+  lightningcss-plugin-fluid@0.0.4:
+    resolution: {integrity: sha512-NY9GsRgxp4IlEhjpaGIT9OrA9BQaucYz++KKUr/D9QHYjDeBtRX5XuNKaYqIUnYcJrs7rzpP8hUHeCS806RwbA==}
 
   lightningcss-win32-arm64-msvc@1.29.1:
     resolution: {integrity: sha512-QoOVnkIEFfbW4xPi+dpdft/zAKmgLgsRHfJalEPYuJDOWf7cLQzYg0DEh8/sn737FaeMJxHZRc1oBreiwZCjog==}
@@ -4725,7 +4731,7 @@ snapshots:
   lightningcss-linux-x64-musl@1.29.1:
     optional: true
 
-  lightningcss-plugin-fluid@0.0.3: {}
+  lightningcss-plugin-fluid@0.0.4: {}
 
   lightningcss-win32-arm64-msvc@1.29.1:
     optional: true
