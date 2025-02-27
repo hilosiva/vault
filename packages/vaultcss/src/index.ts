@@ -2,14 +2,14 @@ import browserslist from 'browserslist';
 import {transform,  composeVisitors, browserslistToTargets } from "lightningcss";
 import type { Targets } from "lightningcss";
 import fluidVisitor from "lightningcss-plugin-fluid";
-import type { Config as fluidConfig} from "lightningcss-plugin-fluid";
+import type { Options as fluidOptions} from "lightningcss-plugin-fluid";
 import prettier from "prettier";
 
 
 export interface PluginOptions {
   globalImportFilePaths?: string | string[];
   targets?: string | string[];
-  fluid?: fluidConfig;
+  fluid?: fluidOptions;
   minify?: boolean;
   valutMediaQuery?: boolean;
 }
@@ -17,7 +17,7 @@ export interface PluginOptions {
 export class VaultCss {
   private targets: Targets;
   private minify: boolean = false;
-  private fluidOptions?: fluidConfig;
+  private fluidOptions?: fluidOptions;
   private globalImports: Set<string> =  new Set();
 
 
