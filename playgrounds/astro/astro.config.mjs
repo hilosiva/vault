@@ -6,7 +6,11 @@ import vaultcss from "vite-plugin-vaultcss";
 export default defineConfig({
 
   vite: {
-    plugins: [vaultcss()],
+    plugins: [vaultcss({
+      fluid: {
+        unit: "vw"
+      }
+    })],
     // css: {
     //   transformer: "lightningcss",
     // },
