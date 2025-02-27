@@ -61,8 +61,8 @@ importers:
         specifier: ^1.29.1
         version: 1.29.1
       lightningcss-plugin-fluid:
-        specifier: ^0.0.5
-        version: 0.0.5
+        specifier: ^0.0.6
+        version: 0.0.6
       prettier:
         specifier: ^3.3.3
         version: 3.4.2
@@ -1827,8 +1827,8 @@ packages:
     cpu: [x64]
     os: [linux]
 
-  lightningcss-plugin-fluid@0.0.5:
-    resolution: {integrity: sha512-iH0XckSB64mxkqi5bRb/P7q6U/W3ppS6p0s7GxMny59Dv6Yo54JssnIwB3b3qCk87XvPzFIYT+dff3Pz/J0ltw==}
+  lightningcss-plugin-fluid@0.0.6:
+    resolution: {integrity: sha512-qj/3ZZSsClLTg9K63YtMRw9d7OToz/HROxvlbgZuY4sZDcUTBE9ecfCXQbQVFPH2wNkXGK3iWe0ifP4310UF6A==}
 
   lightningcss-win32-arm64-msvc@1.29.1:
     resolution: {integrity: sha512-QoOVnkIEFfbW4xPi+dpdft/zAKmgLgsRHfJalEPYuJDOWf7cLQzYg0DEh8/sn737FaeMJxHZRc1oBreiwZCjog==}
@@ -4731,7 +4731,7 @@ snapshots:
   lightningcss-linux-x64-musl@1.29.1:
     optional: true
 
-  lightningcss-plugin-fluid@0.0.5: {}
+  lightningcss-plugin-fluid@0.0.6: {}
 
   lightningcss-win32-arm64-msvc@1.29.1:
     optional: true
