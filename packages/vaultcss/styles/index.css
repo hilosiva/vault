@@ -1,5 +1,4 @@
-@layer settings, base, layouts, vendors, components, utilities;
-
+@layer settings, base, general, vendors, components;
 
 /* Settings */
 @import "./variables.css" layer(settings);
@@ -7,6 +6,6 @@
 /* Base */
 @import "./reset.css" layer(base);
 
-/* layouts */
-@import "./grid.css" layer(layouts);
-@import "./container.css" layer(layouts);
+/* components */
+@import "./grid.css" layer(components);
+@import "./container.css" layer(components);
