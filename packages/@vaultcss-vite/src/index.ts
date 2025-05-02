@@ -3,13 +3,11 @@ import { VaultCss } from "vaultcss";
 import type { PluginOptions as vaultOptions } from "vaultcss";
 import type { Plugin, ResolvedConfig } from "vite";
 
-
 export default function vaultcss(options: vaultOptions = {}): Plugin[] {
   let vault: VaultCss | null = null;
-  let config: ResolvedConfig | null = null
+  let config: ResolvedConfig | null = null;
   let minify = false;
   let valutMediaQuery = false;
-
 
   function getExtension(id: string) {
     let [filename] = id.split("?", 2);
@@ -17,38 +15,32 @@ export default function vaultcss(options: vaultOptions = {}): Plugin[] {
   }
 
   function isCss(id: string) {
-
-    if (id.includes('/.vite/')) return
+    if (id.includes("/.vite/")) return;
 
     const ext = getExtension(id);
 
-    const isCss = /(css|scss|sass|less)$/i.test(ext) ||
-                /[?&]lang\.(css|scss|sass|less)/i.test(id);
+    const isCss = /(css|scss|sass|less)$/i.test(ext) || /[?&]lang\.(css|scss|sass|less)/i.test(id);
     return isCss;
   }
-
 
   return [
     {
       name: "vaultcss/vite:config",
-      enforce: 'pre',
+      enforce: "pre",
 
-    config: () => ({
-      css: {
-        lightningcss: {
-          drafts: {
-            customMedia: true
-          }
+      config: () => ({
+        css: {
+          lightningcss: {
+            drafts: {
+              customMedia: true,
+            },
+          },
         },
-      }
-    }),
-
-
+      }),
     },
     {
       name: "vaultcss/vite:scan",
-      enforce: 'pre',
-
+      enforce: "pre",
 
       configResolved(resolvedConfig) {
         config = resolvedConfig;
@@ -57,25 +49,20 @@ export default function vaultcss(options: vaultOptions = {}): Plugin[] {
       },
 
       buildStart() {
-        vault = new VaultCss({ ...options, minify, valutMediaQuery: true });
+        vault = new VaultCss({ valutMediaQuery: true, ...options, minify });
       },
 
-
-
       transform(code, id) {
-
         if (!vault || !isCss(id)) return;
 
         code = vault.prependGlobalImports(code);
         return { code };
       },
-
     },
     {
       name: "vaultcss/vite:generate",
 
       async transform(code, id) {
-
         if (!vault || !isCss(id)) return;
 
         code = await vault.compiler(code);

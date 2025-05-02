@@ -1,15 +1,16 @@
-@charset "UTF-8";
+@use "var";
+@use "test";
+
 /* @import "olex"; */
 
 /* @import "vaultcss/mediaqueries"; */
-@import "vaultcss";
-
+// @import "vaultcss";
 
 /* @custom-media --md (width >= 500px); */
 /* @import "./base/oreset.css"; */
 
 @media (--md) {
   body {
-    color: red;
+    color: var.$color;
   }
 }

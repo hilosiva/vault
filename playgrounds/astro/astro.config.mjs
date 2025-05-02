@@ -4,13 +4,14 @@ import vaultcss from "vite-plugin-vaultcss";
 
 // https://astro.build/config
 export default defineConfig({
-
   vite: {
-    plugins: [vaultcss({
-      fluid: {
-        unit: "vw"
-      }
-    })],
+    plugins: [
+      vaultcss({
+        fluid: {
+          unit: "cqi",
+        },
+      }),
+    ],
     // css: {
     //   transformer: "lightningcss",
     // },
@@ -20,5 +21,4 @@ export default defineConfig({
     host: true,
     open: true,
   },
-
 });

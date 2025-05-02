@@ -1,10 +1,9 @@
-import browserslist from 'browserslist';
-import {transform,  composeVisitors, browserslistToTargets } from "lightningcss";
+import browserslist from "browserslist";
+import { transform, composeVisitors, browserslistToTargets } from "lightningcss";
 import type { Targets } from "lightningcss";
 import fluidVisitor from "lightningcss-plugin-fluid";
-import type { Options as fluidOptions} from "lightningcss-plugin-fluid";
+import type { Options as fluidOptions } from "lightningcss-plugin-fluid";
 import prettier from "prettier";
-
 
 export interface PluginOptions {
   globalImportFilePaths?: string | string[];
@@ -18,11 +17,9 @@ export class VaultCss {
   private targets: Targets;
   private minify: boolean = false;
   private fluidOptions?: fluidOptions;
-  private globalImports: Set<string> =  new Set();
-
+  private globalImports: Set<string> = new Set();
 
   constructor(options?: Partial<PluginOptions>) {
-
     this.targets = browserslistToTargets(browserslist(options?.targets || "defaults"));
 
     if (options?.minify) {
@@ -30,16 +27,15 @@ export class VaultCss {
     }
 
     if (options?.valutMediaQuery) {
-       this.globalImports.add("vaultcss/mediaqueries.css");
+      this.globalImports.add("vaultcss/mediaqueries.css");
     }
-
 
     if (options?.globalImportFilePaths) {
       const paths = options.globalImportFilePaths;
 
       if (Array.isArray(paths)) {
-        paths.forEach(path => this.globalImports.add(path));
-      } else  {
+        paths.forEach((path) => this.globalImports.add(path));
+      } else {
         this.globalImports.add(paths);
       }
     }
@@ -47,22 +43,17 @@ export class VaultCss {
     if (options?.fluid) {
       this.fluidOptions = options?.fluid;
     }
-
   }
 
-
-   prependGlobalImports(css: string) {
-
-
+  prependGlobalImports(css: string) {
     if (this.globalImports.size === 0) {
       return css;
     }
 
-
-    const imports = [...this.globalImports].map(path => `@import "${path}";`).join("\n");
+    const imports = [...this.globalImports].map((path) => `@import "${path}";`).join("\n");
 
     // @charset や @layer の最後の位置を検索
-    const regex = /@(?:charset|layer)\b[^;]*;/gi;
+    const regex = /@(?:charset|layer|use)\b[^;]*;/gi;
     let match;
     let lastIndex = 0;
 
@@ -71,10 +62,7 @@ export class VaultCss {
     }
 
     return css.slice(0, lastIndex) + (lastIndex > 0 ? "\n" : "") + imports + "\n" + css.slice(lastIndex);
-
   }
-
-
 
   optimize(input: string, { file = "input.css" }: { file?: string } = {}) {
     return transform({
@@ -90,7 +78,7 @@ export class VaultCss {
       },
       targets: this.targets,
       errorRecovery: true,
-      visitor: composeVisitors([fluidVisitor(this.fluidOptions)])
+      visitor: composeVisitors([fluidVisitor(this.fluidOptions)]),
     }).code.toString();
   }
 
