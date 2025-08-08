@@ -4,20 +4,54 @@ import type { Targets } from "lightningcss";
 import fluidVisitor from "lightningcss-plugin-fluid";
 import type { Options as fluidOptions } from "lightningcss-plugin-fluid";
 import prettier from "prettier";
+import fs from "fs";
+import path from "path";
+
+/**
+ * Parse custom media queries from CSS content
+ */
+function parseCustomMediaFromCSS(cssContent: string): Record<string, string> {
+  const customMedia: Record<string, string> = {};
+  const regex = /@custom-media\s+(--[a-zA-Z0-9-_]+)\s+([^;]+);/g;
+  let match;
+  
+  while ((match = regex.exec(cssContent)) !== null) {
+    const [, name, query] = match;
+    customMedia[name] = query.trim();
+  }
+  
+  return customMedia;
+}
+
+/**
+ * Load custom media queries from file path
+ */
+function loadCustomMediaFromFile(filePath: string): Record<string, string> {
+  try {
+    if (fs.existsSync(filePath)) {
+      const cssContent = fs.readFileSync(filePath, 'utf-8');
+      return parseCustomMediaFromCSS(cssContent);
+    }
+  } catch (error) {
+    console.warn(`Failed to load custom media from ${filePath}:`, error);
+  }
+  return {};
+}
 
 export interface PluginOptions {
-  globalImportFilePaths?: string | string[];
   targets?: string | string[];
   fluid?: fluidOptions;
   minify?: boolean;
   valutMediaQuery?: boolean;
+  customMediaPath?: string;
+  customMedia?: Record<string, string>;
 }
 
 export class VaultCss {
   private targets: Targets;
   private minify: boolean = false;
   private fluidOptions?: fluidOptions;
-  private globalImports: Set<string> = new Set();
+  private customMedia: Record<string, string> = {};
 
   constructor(options?: Partial<PluginOptions>) {
     this.targets = browserslistToTargets(browserslist(options?.targets || "defaults"));
@@ -26,18 +60,48 @@ export class VaultCss {
       this.minify = options.minify;
     }
 
-    if (options?.valutMediaQuery) {
-      this.globalImports.add("vaultcss/mediaqueries.css");
-    }
-
-    if (options?.globalImportFilePaths) {
-      const paths = options.globalImportFilePaths;
-
-      if (Array.isArray(paths)) {
-        paths.forEach((path) => this.globalImports.add(path));
-      } else {
-        this.globalImports.add(paths);
+    // Load custom media queries (default: true)
+    const enableBuiltinMedia = options?.valutMediaQuery ?? true;
+    if (enableBuiltinMedia) {
+      try {
+        // Try to load from built-in vaultcss mediaqueries
+        let builtinMediaPath: string;
+        
+        // Check if we're in ESM or CJS environment
+        if (typeof import.meta !== 'undefined' && import.meta.url) {
+          // ESM environment
+          const currentDir = path.dirname(new URL(import.meta.url).pathname);
+          builtinMediaPath = path.resolve(currentDir, "../styles/mediaqueries.css");
+        } else {
+          // CJS environment - fallback to require.resolve
+          builtinMediaPath = path.resolve(__dirname, "../styles/mediaqueries.css");
+        }
+        
+        // Step 1: Load built-in custom media queries
+        this.customMedia = { ...this.customMedia, ...loadCustomMediaFromFile(builtinMediaPath) };
+      } catch (error) {
+        // If loading from package fails, use hardcoded defaults (Step 1 fallback)
+        this.customMedia = {
+          ...this.customMedia,
+          "--xxs": "(width >= 23.4375rem)",
+          "--xs": "(width >= 25rem)",
+          "--sm": "(width >= 36rem)", 
+          "--md": "(width >= 48rem)",
+          "--lg": "(width >= 64rem)",
+          "--xl": "(width >= 80rem)",
+          "--xxl": "(width >= 96rem)",
+        };
       }
+    }
+    
+    if (options?.customMediaPath) {
+      // Step 2: Load from custom file path (can override built-in)
+      this.customMedia = { ...this.customMedia, ...loadCustomMediaFromFile(options.customMediaPath) };
+    }
+    
+    if (options?.customMedia) {
+      // Step 3: Override with programmatically defined custom media (highest priority)
+      this.customMedia = { ...this.customMedia, ...options.customMedia };
     }
 
     if (options?.fluid) {
@@ -45,29 +109,19 @@ export class VaultCss {
     }
   }
 
-  prependGlobalImports(css: string) {
-    if (this.globalImports.size === 0) {
-      return css;
-    }
-
-    const imports = [...this.globalImports].map((path) => `@import "${path}";`).join("\n");
-
-    // @charset や @layer の最後の位置を検索
-    const regex = /@(?:charset|layer|use)\b[^;]*;/gi;
-    let match;
-    let lastIndex = 0;
-
-    while ((match = regex.exec(css)) !== null) {
-      lastIndex = match.index + match[0].length; // 最後のマッチの終了位置を取得
-    }
-
-    return css.slice(0, lastIndex) + (lastIndex > 0 ? "\n" : "") + imports + "\n" + css.slice(lastIndex);
-  }
-
   optimize(input: string, { file = "input.css" }: { file?: string } = {}) {
+    // If custom media is defined, inject it at the beginning of the CSS
+    let processedInput = input;
+    if (Object.keys(this.customMedia).length > 0) {
+      const customMediaDeclarations = Object.entries(this.customMedia)
+        .map(([name, query]) => `@custom-media ${name} ${query};`)
+        .join('\n');
+      processedInput = customMediaDeclarations + '\n' + input;
+    }
+
     return transform({
       filename: file,
-      code: Buffer.from(input),
+      code: Buffer.from(processedInput),
       minify: this.minify,
       sourceMap: false,
       drafts: {

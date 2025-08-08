@@ -10,6 +10,9 @@ export default defineConfig({
         fluid: {
           unit: "cqi",
         },
+        customMedia: {
+          "--project-mobile": "(width <= 768px)",
+        },
       }),
     ],
     // css: {

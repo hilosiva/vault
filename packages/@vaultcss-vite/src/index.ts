@@ -55,7 +55,7 @@ export default function vaultcss(options: vaultOptions = {}): Plugin[] {
       transform(code: string, id: string) {
         if (!vault || !isCss(id)) return;
 
-        code = vault.prependGlobalImports(code);
+        // prependGlobalImports is no longer needed - custom media is handled directly in optimize()
         return { code };
       },
     },

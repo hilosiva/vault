@@ -15,7 +15,7 @@ import Layout from "@layouts/Layout.astro";
 </Layout>
 
 <style lang="scss">
-  /* @custom-media --xxl (width >= 1440px); */
+  @custom-media --xxl (width >= 900px);
 
   .container {
     --offset: var(--offset-md);
@@ -33,6 +33,12 @@ import Layout from "@layouts/Layout.astro";
 
     @media (--xl) {
       background: #400;
+    }
+    @media (--xxl) {
+      background: #808;
+    }
+    @media (--project-mobile) {
+      background: #018;
     }
 
     h1 {
