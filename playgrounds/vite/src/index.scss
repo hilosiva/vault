@@ -1,9 +1,8 @@
 @layer settings, base, layouts, vendors, components, utilities;
 @import "vaultcss/index.css";
 
-
-
 body {
+  container: body / inline-size;
   /* height: 100vh; 高さを調整 */
 
   /* &::before {
@@ -45,6 +44,7 @@ h2 {
   /* line-height: var(--line-height-3xl); */
 }
 h3 {
+  font-size: fluid(40px 80px 375px 1024px cqw);
   /* font-size: var(--font-2xl);
   line-height: 2.5rlh; */
   /* line-height: 1.25; */
@@ -82,19 +82,16 @@ h6 {
   grid-row: span 3;
 }
 
-
 body {
-
   background: #0c0;
   font-size: fluid(1.5rem 2rem);
 
   @media (--lg) {
-     background: #000;
-     color: #fff;
+    background: #000;
+    color: #fff;
     font-size: fluid(1.5rem 2rem);
   }
 }
-
 
 modal-dialog dialog {
   transition: all 2s ease;

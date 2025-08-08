@@ -42,7 +42,7 @@ export default function vaultcss(options: vaultOptions = {}): Plugin[] {
       name: "vaultcss/vite:scan",
       enforce: "pre",
 
-      configResolved(resolvedConfig) {
+      configResolved(resolvedConfig: ResolvedConfig) {
         config = resolvedConfig;
         minify = config.build.ssr === false && config.build.cssMinify !== false;
         valutMediaQuery = config.css.lightningcss?.drafts?.customMedia || false;
@@ -52,7 +52,7 @@ export default function vaultcss(options: vaultOptions = {}): Plugin[] {
         vault = new VaultCss({ valutMediaQuery: true, ...options, minify });
       },
 
-      transform(code, id) {
+      transform(code: string, id: string) {
         if (!vault || !isCss(id)) return;
 
         code = vault.prependGlobalImports(code);
@@ -62,7 +62,7 @@ export default function vaultcss(options: vaultOptions = {}): Plugin[] {
     {
       name: "vaultcss/vite:generate",
 
-      async transform(code, id) {
+      async transform(code: string, id: string) {
         if (!vault || !isCss(id)) return;
 
         code = await vault.compiler(code);
