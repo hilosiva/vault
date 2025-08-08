@@ -1,7 +1,6 @@
 @layer settings, base, general, vendors, components;
 
 /* Settings */
-@import "./mediaqueries.css";
 @import "./variables.css" layer(settings);
 
 /* Base */

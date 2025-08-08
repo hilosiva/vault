@@ -5,6 +5,38 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.2] - 2025-01-08
+
+### Improved
+- 🧹 **Code Optimization** - Removed unused imports and redundant code in vite plugin
+- ⚡️ **Performance** - Replaced path module with native string operations for better efficiency
+- 📦 **Bundle Size** - Further reduced package size by cleaning up unnecessary dependencies
+
+### Removed
+- 🗑️ **Unused Dependencies** - Removed redundant path imports and fallback vault instance creation
+
+## [0.2.1] - 2025-01-08
+
+### Fixed
+- 🐛 **Custom Media Query Resolution** - Fixed critical issue where custom media queries were not being processed correctly in Astro projects
+- 🔧 **TypeScript Import Errors** - Resolved `PluginOptions` import issues in vite-plugin-vaultcss
+
+### Improved  
+- 🧹 **Simplified Implementation** - Replaced complex file-based loading with reliable JavaScript-based custom media definitions
+- ⚡️ **Performance** - Removed unnecessary file I/O operations and dependency resolution
+- 📦 **Bundle Size** - Reduced package size by removing unused functions and dependencies
+
+### Removed
+- 🗑️ **Deprecated Features** - Removed `customMediaPath` option (complex file loading system)
+- 🗑️ **Unused Code** - Cleaned up `parseCustomMediaFromCSS` and `loadCustomMediaFromFile` functions
+- 🗑️ **Redundant CSS** - Removed duplicate `@import "./mediaqueries.css"` from index.css
+- 🗑️ **Unused Dependencies** - Removed redundant path imports and fallback vault instance creation
+
+### Technical Details
+- Custom media queries are now defined directly in JavaScript for guaranteed availability
+- Priority order clarified: In-file definitions > Plugin options > Built-in breakpoints  
+- Simplified API surface with focus on programmatic configuration
+
 ## [0.2.0] - 2024-12-19
 
 ### Added

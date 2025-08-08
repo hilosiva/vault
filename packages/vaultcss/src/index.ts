@@ -4,46 +4,12 @@ import type { Targets } from "lightningcss";
 import fluidVisitor from "lightningcss-plugin-fluid";
 import type { Options as fluidOptions } from "lightningcss-plugin-fluid";
 import prettier from "prettier";
-import fs from "fs";
-import path from "path";
-
-/**
- * Parse custom media queries from CSS content
- */
-function parseCustomMediaFromCSS(cssContent: string): Record<string, string> {
-  const customMedia: Record<string, string> = {};
-  const regex = /@custom-media\s+(--[a-zA-Z0-9-_]+)\s+([^;]+);/g;
-  let match;
-  
-  while ((match = regex.exec(cssContent)) !== null) {
-    const [, name, query] = match;
-    customMedia[name] = query.trim();
-  }
-  
-  return customMedia;
-}
-
-/**
- * Load custom media queries from file path
- */
-function loadCustomMediaFromFile(filePath: string): Record<string, string> {
-  try {
-    if (fs.existsSync(filePath)) {
-      const cssContent = fs.readFileSync(filePath, 'utf-8');
-      return parseCustomMediaFromCSS(cssContent);
-    }
-  } catch (error) {
-    console.warn(`Failed to load custom media from ${filePath}:`, error);
-  }
-  return {};
-}
 
 export interface PluginOptions {
   targets?: string | string[];
   fluid?: fluidOptions;
   minify?: boolean;
   valutMediaQuery?: boolean;
-  customMediaPath?: string;
   customMedia?: Record<string, string>;
 }
 
@@ -63,9 +29,8 @@ export class VaultCss {
     // Load custom media queries (default: true)
     const enableBuiltinMedia = options?.valutMediaQuery ?? true;
     if (enableBuiltinMedia) {
-      // Step 1: Use built-in custom media queries
+      // Built-in custom media queries
       this.customMedia = {
-        ...this.customMedia,
         "--xxs": "(width >= 23.4375rem)",
         "--xs": "(width >= 25rem)",
         "--sm": "(width >= 36rem)", 
@@ -76,13 +41,8 @@ export class VaultCss {
       };
     }
     
-    if (options?.customMediaPath) {
-      // Step 2: Load from custom file path (can override built-in)
-      this.customMedia = { ...this.customMedia, ...loadCustomMediaFromFile(options.customMediaPath) };
-    }
-    
+    // Override with custom media (highest priority)
     if (options?.customMedia) {
-      // Step 3: Override with programmatically defined custom media (highest priority)
       this.customMedia = { ...this.customMedia, ...options.customMedia };
     }
 

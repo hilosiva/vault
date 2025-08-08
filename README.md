@@ -9,10 +9,10 @@ A modern, flexible CSS framework built with LightningCSS for ultra-fast processi
 ### 🎨 [vaultcss](./packages/vaultcss) 
 **Core CSS Framework**
 - ⚡️ **LightningCSS Processing** - Rust-powered, 100x faster than JS alternatives
-- 📱 **Custom Media Queries** - Flexible breakpoint system with override support
+- 📱 **Custom Media Queries** - Built-in responsive breakpoints with full override support
 - 🌊 **Fluid Typography** - `fluid()` function for responsive scaling
 - 🎯 **Modern CSS Support** - Container Queries, CSS Nesting, Custom Properties
-- 🔧 **Configurable** - Customize breakpoints, load from files, or define programmatically
+- 🔧 **Configurable** - Customize breakpoints programmatically or in files
 
 ### ⚡️ [vite-plugin-vaultcss](./packages/@vaultcss-vite)
 **Vite Integration Plugin**
@@ -29,44 +29,59 @@ A modern, flexible CSS framework built with LightningCSS for ultra-fast processi
 
 ## Features
 
-### Custom Media Queries (v0.2.0+)
+### Custom Media Queries (v0.2.1+)
 
-VaultCSS provides flexible custom media query support:
+VaultCSS provides flexible custom media query support with multiple override methods:
 
 ```css
 /* Use built-in breakpoints */
+@media (--sm) { ... } /* width >= 36rem */  
+@media (--md) { ... } /* width >= 48rem */
 @media (--lg) { ... } /* width >= 64rem */
 @media (--xl) { ... } /* width >= 80rem */
+```
+
+#### Built-in Breakpoints
+```css
+--xxs: (width >= 23.4375rem)  /* 375px */
+--xs:  (width >= 25rem)       /* 400px */
+--sm:  (width >= 36rem)       /* 576px */  
+--md:  (width >= 48rem)       /* 768px */
+--lg:  (width >= 64rem)       /* 1024px */
+--xl:  (width >= 80rem)       /* 1280px */
+--xxl: (width >= 96rem)       /* 1536px */
 ```
 
 #### Configuration Options
 
 ```javascript
-// vite.config.js
+// vite.config.js / astro.config.mjs
+import vaultcss from 'vite-plugin-vaultcss';
+
 export default defineConfig({
-  plugins: [
-    vaultcss({
-      // Built-in custom media queries (default: true)
-      valutMediaQuery: true,
-      
-      // Load custom media from file
-      customMediaPath: "./src/styles/breakpoints.css",
-      
-      // Define custom media programmatically
-      customMedia: {
-        "--mobile": "(width <= 768px)",
-        "--desktop": "(width >= 1024px)"
-      }
-    })
-  ]
+  vite: {
+    plugins: [
+      vaultcss({
+        // Enable built-in custom media queries (default: true)
+        valutMediaQuery: true,
+        
+        // Override or add custom media programmatically
+        customMedia: {
+          "--mobile": "(max-width: 768px)",
+          "--desktop": "(min-width: 1024px)",
+          "--md": "(min-width: 900px)"  // Override built-in --md
+        }
+      })
+    ]
+  }
 });
 ```
 
-#### Priority Order
+#### Priority Order (Highest to Lowest)
 
-1. **Built-in** - Default breakpoints (--xs, --sm, --md, --lg, --xl, --xxl)
-2. **File** - Loaded from `customMediaPath`
-3. **Programmatic** - Defined in `customMedia` (highest priority)
+1. **In-file definitions** - `@custom-media --md (min-width: 900px);` in CSS/Astro files
+2. **Plugin options** - `customMedia` in Vite plugin configuration  
+3. **Built-in breakpoints** - Default VaultCSS breakpoints
 
 ### Perfect Compatibility
 
@@ -81,12 +96,43 @@ export default defineConfig({
 - CSS Nesting
 - Modern CSS features
 
+#### Usage Examples
+
+```css
+/* In any CSS or Astro file */
+.component {
+  /* Use built-in breakpoints */
+  @media (--md) {
+    padding: 2rem;
+  }
+  
+  /* Override with custom definition */
+  @custom-media --special (min-width: 600px) and (max-width: 1200px);
+  @media (--special) {
+    background: blue;
+  }
+}
+```
+
+```astro
+<!-- In Astro files -->
+<style>
+@custom-media --tablet (min-width: 768px) and (max-width: 1024px);
+
+.hero {
+  @media (--lg) { font-size: 3rem; }
+  @media (--tablet) { font-size: 2rem; }
+}
+</style>
+```
+
 ## Migration from v0.1.x
 
-### Removed Features
+### Removed Features (v0.2.1)
 
-- `globalImportFilePaths` option - No longer needed
-- `prependGlobalImports()` method - Replaced with direct injection
+- `globalImportFilePaths` option - No longer needed with direct injection
+- `prependGlobalImports()` method - Replaced with built-in custom media
+- `customMediaPath` option - Simplified to programmatic configuration only
 
 ### Changed Behavior
 

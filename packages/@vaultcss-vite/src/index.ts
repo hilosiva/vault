@@ -1,4 +1,3 @@
-import path from "path";
 import { VaultCss } from "vaultcss";
 import type { PluginOptions as vaultOptions } from "vaultcss";
 import type { Plugin, ResolvedConfig } from "vite";
@@ -7,11 +6,10 @@ export default function vaultcss(options: vaultOptions = {}): Plugin[] {
   let vault: InstanceType<typeof VaultCss> | null = null;
   let config: ResolvedConfig | null = null;
   let minify = false;
-  let valutMediaQuery = false;
 
   function getExtension(id: string) {
     let [filename] = id.split("?", 2);
-    return path.extname(filename).slice(1);
+    return filename.split('.').pop() || '';
   }
 
   function isCss(id: string) {
@@ -45,7 +43,6 @@ export default function vaultcss(options: vaultOptions = {}): Plugin[] {
       configResolved(resolvedConfig: ResolvedConfig) {
         config = resolvedConfig;
         minify = config.build.ssr === false && config.build.cssMinify !== false;
-        valutMediaQuery = config.css.lightningcss?.drafts?.customMedia || false;
       },
 
       buildStart() {
@@ -60,10 +57,6 @@ export default function vaultcss(options: vaultOptions = {}): Plugin[] {
           return;
         }
 
-        // Create vault instance if not exists (fallback)
-        if (!vault) {
-          vault = new VaultCss({ valutMediaQuery: true, ...options, minify: true });
-        }
         code = await vault.compiler(code);
         return { code };
       },
