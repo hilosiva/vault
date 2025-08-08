@@ -4,7 +4,7 @@ import type { PluginOptions as vaultOptions } from "vaultcss";
 import type { Plugin, ResolvedConfig } from "vite";
 
 export default function vaultcss(options: vaultOptions = {}): Plugin[] {
-  let vault: VaultCss | null = null;
+  let vault: InstanceType<typeof VaultCss> | null = null;
   let config: ResolvedConfig | null = null;
   let minify = false;
   let valutMediaQuery = false;
@@ -51,20 +51,19 @@ export default function vaultcss(options: vaultOptions = {}): Plugin[] {
       buildStart() {
         vault = new VaultCss({ valutMediaQuery: true, ...options, minify });
       },
-
-      transform(code: string, id: string) {
-        if (!vault || !isCss(id)) return;
-
-        // prependGlobalImports is no longer needed - custom media is handled directly in optimize()
-        return { code };
-      },
     },
     {
       name: "vaultcss/vite:generate",
 
       async transform(code: string, id: string) {
-        if (!vault || !isCss(id)) return;
+        if (!vault || !isCss(id)) {
+          return;
+        }
 
+        // Create vault instance if not exists (fallback)
+        if (!vault) {
+          vault = new VaultCss({ valutMediaQuery: true, ...options, minify: true });
+        }
         code = await vault.compiler(code);
         return { code };
       },

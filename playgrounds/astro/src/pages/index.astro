@@ -14,35 +14,4 @@ import Layout from "@layouts/Layout.astro";
   </main>
 </Layout>
 
-<style lang="scss">
-  @custom-media --xxl (width >= 900px);
-
-  .container {
-    --offset: var(--offset-md);
-  }
-
-  $color: red;
-  main {
-    font-size: fluid(32px 40px);
-    margin-block-start: 10rem;
-    text-align: start;
-
-    @media (--lg) {
-      background: $color;
-    }
-
-    @media (--xl) {
-      background: #400;
-    }
-    @media (--xxl) {
-      background: #808;
-    }
-    @media (--project-mobile) {
-      background: #018;
-    }
-
-    h1 {
-      font-size: fluid(32px 80px cqi);
-    }
-  }
-</style>
+<style></style>

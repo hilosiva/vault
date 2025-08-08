@@ -63,35 +63,17 @@ export class VaultCss {
     // Load custom media queries (default: true)
     const enableBuiltinMedia = options?.valutMediaQuery ?? true;
     if (enableBuiltinMedia) {
-      try {
-        // Try to load from built-in vaultcss mediaqueries
-        let builtinMediaPath: string;
-        
-        // Check if we're in ESM or CJS environment
-        if (typeof import.meta !== 'undefined' && import.meta.url) {
-          // ESM environment
-          const currentDir = path.dirname(new URL(import.meta.url).pathname);
-          builtinMediaPath = path.resolve(currentDir, "../styles/mediaqueries.css");
-        } else {
-          // CJS environment - fallback to require.resolve
-          builtinMediaPath = path.resolve(__dirname, "../styles/mediaqueries.css");
-        }
-        
-        // Step 1: Load built-in custom media queries
-        this.customMedia = { ...this.customMedia, ...loadCustomMediaFromFile(builtinMediaPath) };
-      } catch (error) {
-        // If loading from package fails, use hardcoded defaults (Step 1 fallback)
-        this.customMedia = {
-          ...this.customMedia,
-          "--xxs": "(width >= 23.4375rem)",
-          "--xs": "(width >= 25rem)",
-          "--sm": "(width >= 36rem)", 
-          "--md": "(width >= 48rem)",
-          "--lg": "(width >= 64rem)",
-          "--xl": "(width >= 80rem)",
-          "--xxl": "(width >= 96rem)",
-        };
-      }
+      // Step 1: Use built-in custom media queries
+      this.customMedia = {
+        ...this.customMedia,
+        "--xxs": "(width >= 23.4375rem)",
+        "--xs": "(width >= 25rem)",
+        "--sm": "(width >= 36rem)", 
+        "--md": "(width >= 48rem)",
+        "--lg": "(width >= 64rem)",
+        "--xl": "(width >= 80rem)",
+        "--xxl": "(width >= 96rem)",
+      };
     }
     
     if (options?.customMediaPath) {
