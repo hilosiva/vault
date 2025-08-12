@@ -153,6 +153,9 @@ class InvokerPolyfill {
 
       // イベントリスナーを追加
       const clickHandler = (event: Event): void => {
+        if (event.defaultPrevented) {
+          return; // 既にpreventDefaultが呼ばれていたら実行しない
+        }
         event.preventDefault();
         this.executeCommand(target, command, button);
       };
@@ -483,6 +486,9 @@ class InvokerPolyfill {
 
         if (target) {
           const clickHandler = (event: Event): void => {
+            if (event.defaultPrevented) {
+              return; // 既にpreventDefaultが呼ばれていたら実行しない
+            }
             event.preventDefault();
             this.executeCommand(target, command, buttonElement);
           };
