@@ -1,5 +1,4 @@
-import {debounce} from "../utils/debounce";
-
+import { debounce } from "../utils/debounce";
 
 declare global {
   interface Window {
@@ -13,24 +12,22 @@ declare global {
 export type AnimateFunction = () => Promise<boolean>;
 
 export interface Options {
-  isJS: boolean,
-  isLoad: boolean,
-  isIos: boolean,
-  isResize: boolean,
-  isReduceMotion: boolean,
-  once: boolean,
-  viewport: number,
-  targetSelector: string,
-  eventType: 'load' | 'astro:page-load',
-  loadingAnimation: AnimateFunction | false,
-  loadingOutAnimation: AnimateFunction| false,
-  pageTransitionOut: AnimateFunction | false,
-  pageTransitionIn: AnimateFunction | false,
+  isJS: boolean;
+  isLoad: boolean;
+  isIos: boolean;
+  isResize: boolean;
+  isReduceMotion: boolean;
+  once: boolean;
+  viewport: number;
+  targetSelector: string;
+  eventType: "load" | "astro:page-load";
+  loadingAnimation: AnimateFunction | false;
+  loadingOutAnimation: AnimateFunction | false;
+  pageTransitionOut: AnimateFunction | false;
+  pageTransitionIn: AnimateFunction | false;
 }
 
-
 export default class Loading {
-
   private resizeTimeoutId: NodeJS.Timeout | undefined;
   private isResizing: boolean = false;
   private loadedEvent: Event | null = null;
@@ -42,7 +39,6 @@ export default class Loading {
   private options: Options;
 
   constructor(options?: Partial<Options>) {
-
     const defaultOptions: Options = {
       isJS: true,
       isLoad: true,
@@ -65,10 +61,8 @@ export default class Loading {
     this._init();
   }
 
-
   private async _init() {
     if (!this.target) return;
-
 
     if (this.options.isJS) {
       window.isEnabledScript = true;
@@ -96,7 +90,6 @@ export default class Loading {
       }
     }
 
-
     // prefersReducedMotion
     if (this.options.isReduceMotion) {
       const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -119,30 +112,23 @@ export default class Loading {
     }
 
     // ローディング
-    this.isAnimated =
-      this.options.loadingAnimation && (!this.options.once || !this.isVisited)
-        ? await this.options.loadingAnimation()
-        : true;
+    this.isAnimated = this.options.loadingAnimation && (!this.options.once || !this.isVisited) ? await this.options.loadingAnimation() : true;
 
     this._checkLoaded();
   }
 
-
   // Viewportを設定
-   private _setViewport() {
-    const value =
-      window.outerWidth > this.options.viewport
-        ? "width=device-width, initial-scale=1.0"
-        : `width=${this.options.viewport}`;
+  private _setViewport() {
+    const value = window.outerWidth > this.options.viewport ? "width=device-width, initial-scale=1.0" : `width=${this.options.viewport}`;
 
-     this.metaElem?.setAttribute("content", value);
-   }
+    this.metaElem?.setAttribute("content", value);
+  }
 
   private _setVisited() {
     try {
       sessionStorage.setItem("isVisited", "true");
     } catch (error) {
-      console.warn('Could not access sessionStorage:', error);
+      console.warn("Could not access sessionStorage:", error);
     }
     this._getVisited();
   }
@@ -151,11 +137,10 @@ export default class Loading {
     try {
       this.isVisited = !!sessionStorage.getItem("isVisited");
     } catch (error) {
-      console.warn('Could not access sessionStorage:', error);
+      console.warn("Could not access sessionStorage:", error);
       this.isVisited = false;
     }
   }
-
 
   private async _loading() {
     this.isLoaded = true;
@@ -165,8 +150,10 @@ export default class Loading {
 
   private async _checkLoaded() {
     if (this.isAnimated && this.isLoaded) {
-      if (this.options.loadingOutAnimation && (!this.options.once || !this.isVisited))
+      document.dispatchEvent(new CustomEvent("vault:loaded"));
+      if (this.options.loadingOutAnimation && (!this.options.once || !this.isVisited)) {
         await this.options.loadingOutAnimation();
+      }
       if (this.options.once && !this.isVisited) this._setVisited();
 
       this.run();
@@ -182,13 +169,10 @@ export default class Loading {
     }
 
     if (this.options.pageTransitionIn) await this.options.pageTransitionIn();
-
   }
 
   private _checkIos() {
-    window.isIos =
-      /iP(hone|(o|a)d)/.test(navigator.userAgent) ||
-      (/iPad|Macintosh/i.test(navigator.userAgent) && "ontouchend" in document);
+    window.isIos = /iP(hone|(o|a)d)/.test(navigator.userAgent) || (/iPad|Macintosh/i.test(navigator.userAgent) && "ontouchend" in document);
 
     if (window.isIos) {
       this.target?.setAttribute("data-ios", "");
@@ -200,7 +184,7 @@ export default class Loading {
       this.isResizing = true;
       this.target?.setAttribute("data-resize", "");
     }
-    
+
     clearTimeout(this.resizeTimeoutId);
 
     this.resizeTimeoutId = setTimeout(() => {
