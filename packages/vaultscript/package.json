@@ -1,6 +1,6 @@
 {
   "name": "vaultscript",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Unlock the Power of JavaScript",
   "type": "module",
   "main": "dist/index.js",

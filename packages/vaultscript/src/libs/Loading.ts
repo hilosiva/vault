@@ -89,7 +89,6 @@ export default class Loading {
     }
 
     if (this.options.isLoad) {
-      this.loadedEvent = new CustomEvent("pageLoaded");
       if (this.options.eventType === "astro:page-load") {
         document.addEventListener("astro:page-load", this._loading.bind(this));
       } else {
@@ -160,6 +159,7 @@ export default class Loading {
 
   private async _loading() {
     this.isLoaded = true;
+    this.loadedEvent = new CustomEvent("pageLoaded");
     await this._checkLoaded();
   }
 
