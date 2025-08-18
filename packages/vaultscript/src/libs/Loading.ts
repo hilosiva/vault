@@ -159,7 +159,7 @@ export default class Loading {
 
   private async _loading() {
     this.isLoaded = true;
-    this.loadedEvent = new CustomEvent("pageLoaded");
+    this.loadedEvent = new CustomEvent("vault:ready");
     await this._checkLoaded();
   }
 
@@ -178,7 +178,7 @@ export default class Loading {
     this.target?.removeAttribute("data-loading");
     // イベントの発火
     if (this.loadedEvent) {
-      document.body.dispatchEvent(this.loadedEvent);
+      document.dispatchEvent(this.loadedEvent);
     }
 
     if (this.options.pageTransitionIn) await this.options.pageTransitionIn();
