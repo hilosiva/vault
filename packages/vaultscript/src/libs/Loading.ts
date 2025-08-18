@@ -21,6 +21,7 @@ export interface Options {
   once: boolean,
   viewport: number,
   targetSelector: string,
+  eventType: 'load' | 'astro:page-load',
   loadingAnimation: AnimateFunction | false,
   loadingOutAnimation: AnimateFunction| false,
   pageTransitionOut: AnimateFunction | false,
@@ -31,10 +32,11 @@ export interface Options {
 export default class Loading {
 
   private resizeTimeoutId: NodeJS.Timeout | undefined;
+  private isResizing: boolean = false;
   private loadedEvent: Event | null = null;
-  private isLoaded: boolean = false;
   private isAnimated: boolean = false;
-  private isVisited: boolean = false;
+  public isLoaded: boolean = false;
+  public isVisited: boolean = false;
   private target: HTMLElement | null;
   private metaElem: HTMLMetaElement | null = null;
   private options: Options;
@@ -50,6 +52,7 @@ export default class Loading {
       once: true,
       viewport: 375,
       targetSelector: "html",
+      eventType: "load",
       loadingAnimation: false,
       loadingOutAnimation: false,
       pageTransitionOut: false,
@@ -87,7 +90,11 @@ export default class Loading {
 
     if (this.options.isLoad) {
       this.loadedEvent = new CustomEvent("pageLoaded");
-      window.addEventListener("load", this._loading.bind(this));
+      if (this.options.eventType === "astro:page-load") {
+        document.addEventListener("astro:page-load", this._loading.bind(this));
+      } else {
+        window.addEventListener("load", this._loading.bind(this));
+      }
     }
 
 
@@ -133,12 +140,21 @@ export default class Loading {
    }
 
   private _setVisited() {
-    sessionStorage.setItem("isVisited", "true");
+    try {
+      sessionStorage.setItem("isVisited", "true");
+    } catch (error) {
+      console.warn('Could not access sessionStorage:', error);
+    }
     this._getVisited();
   }
 
   private _getVisited() {
-    this.isVisited = !!sessionStorage.getItem("isVisited");
+    try {
+      this.isVisited = !!sessionStorage.getItem("isVisited");
+    } catch (error) {
+      console.warn('Could not access sessionStorage:', error);
+      this.isVisited = false;
+    }
   }
 
 
@@ -180,10 +196,15 @@ export default class Loading {
   }
 
   private _resize() {
-    this.target?.setAttribute("data-resize", "");
+    if (!this.isResizing) {
+      this.isResizing = true;
+      this.target?.setAttribute("data-resize", "");
+    }
+    
     clearTimeout(this.resizeTimeoutId);
 
     this.resizeTimeoutId = setTimeout(() => {
+      this.isResizing = false;
       this.target?.removeAttribute("data-resize");
     }, 500);
   }
