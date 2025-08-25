@@ -2,9 +2,9 @@ import Lenis, { type LenisOptions } from "lenis";
 
 export default class MomentumScroll {
   lenis: Lenis | null;
-  linkEls: NodeListOf<HTMLElement>;
   options: LenisOptions;
   mediaQuery: MediaQueryList;
+  linkEls?: NodeListOf<HTMLElement>;
 
   constructor(options?: LenisOptions) {
     const defaultOptions: LenisOptions = {
@@ -15,15 +15,9 @@ export default class MomentumScroll {
 
     this.options = Object.assign(defaultOptions, options);
     this.mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    this.linkEls = document.querySelectorAll('a[href^="#"]');
     this.mediaQuery.addEventListener("change", this._init.bind(this));
 
-    if (this.linkEls) {
-      for (let i = 0; i < this.linkEls.length; i++) {
-        this.linkEls[i].addEventListener("click", this._pageLink.bind(this));
-      }
-    }
-
+    this.setAnchors();
     this._init();
   }
 
@@ -43,6 +37,15 @@ export default class MomentumScroll {
 
     const anchor = e.currentTarget?.getAttribute("href");
     if (anchor) this.lenis?.scrollTo(anchor);
+  }
+
+  setAnchors() {
+    this.linkEls = document.querySelectorAll('a[href^="#"]');
+    if (this.linkEls) {
+      for (let i = 0; i < this.linkEls.length; i++) {
+        this.linkEls[i].addEventListener("click", this._pageLink.bind(this));
+      }
+    }
   }
 
   run() {
