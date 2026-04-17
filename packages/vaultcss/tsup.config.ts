@@ -2,31 +2,21 @@ import { defineConfig } from 'tsup';
 
 export default defineConfig([
   {
+    entry: ['src/index.ts', 'src/cli.ts'],
+    format: ['esm'],
+    dts: false,
+    minify: false,
+    sourcemap: false,
+    clean: true,
+    publicDir: "./styles"
+  },
+  {
     entry: ['src/index.ts'],
-    format: ['cjs', 'esm'],
+    format: ['cjs'],
     dts: true,
     minify: true,
     sourcemap: true,
-    clean: true,
+    clean: false,
     cjsInterop: true,
-    publicDir: "./styles"
-  },
-  // {
-  //   entry: ['./src/*.css'],
-  //   minify: true,
-  //   sourcemap: false,
-  //   clean: true,
-  //   target: "es2020",
-  //   // outDir: "dist/styles",
-  // },
-  {
-    entry: {
-      reset: 'node_modules/@hilosiva/oreset/dist/oreset.css'
-    },
-    minify: true,
-    sourcemap: false,
-    clean: true,
-    target: "es2020",
-    // outDir: "dist/styles",
   },
 ]);

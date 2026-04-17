@@ -1,11 +1,19 @@
-@layer settings, base, general, vendors, components;
+@layer tokens, reset, base, vendors, components, utilities;
 
-/* Settings */
-@import "./variables.css" layer(settings);
+/* Tokens */
+@import "./tokens/tokens.css" layer(tokens);
+
+/* Reset */
+@import "./reset/reset.css" layer(reset);
 
 /* Base */
-@import "./reset.css" layer(base);
+@import "./base/html.css" layer(base);
+@import "./base/a.css" layer(base);
+@import "./base/hn.css" layer(base);
 
-/* components */
-@import "./grid.css" layer(components);
-@import "./container.css" layer(components);
+/* Components */
+@import "./components/grid.css" layer(components);
+@import "./components/container.css" layer(components);
+
+/* Utilities */
+@import "./utilities/utilities.css" layer(utilities);

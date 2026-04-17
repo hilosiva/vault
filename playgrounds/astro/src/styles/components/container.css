@@ -1,0 +1,14 @@
+:where(.container ) {
+  --container-name: container;
+  --layout: flow-root;
+  --max-size: none;
+  --offset-start: 0;
+  --offset-end: 0;
+  --offset: var(--offset-start) var(--offset-end);
+
+  box-sizing: content-box;
+  display: block var(--layout);
+  max-inline-size: var(--max-size);
+  padding-inline: var(--offset);
+  margin-inline: auto;
+}

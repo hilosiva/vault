@@ -1,3 +1,4 @@
+/* @vaultcss mediaqueries */
 @custom-media --xxs (width >= 23.4375rem);
 @custom-media --xs (width >= 25rem);
 @custom-media --sm (width >= 36rem);

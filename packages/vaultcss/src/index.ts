@@ -9,7 +9,6 @@ export interface PluginOptions {
   targets?: string | string[];
   fluid?: fluidOptions;
   minify?: boolean;
-  valutMediaQuery?: boolean;
   customMedia?: Record<string, string>;
 }
 
@@ -26,24 +25,8 @@ export class VaultCss {
       this.minify = options.minify;
     }
 
-    // Load custom media queries (default: true)
-    const enableBuiltinMedia = options?.valutMediaQuery ?? true;
-    if (enableBuiltinMedia) {
-      // Built-in custom media queries
-      this.customMedia = {
-        "--xxs": "(width >= 23.4375rem)",
-        "--xs": "(width >= 25rem)",
-        "--sm": "(width >= 36rem)", 
-        "--md": "(width >= 48rem)",
-        "--lg": "(width >= 64rem)",
-        "--xl": "(width >= 80rem)",
-        "--xxl": "(width >= 96rem)",
-      };
-    }
-    
-    // Override with custom media (highest priority)
     if (options?.customMedia) {
-      this.customMedia = { ...this.customMedia, ...options.customMedia };
+      this.customMedia = options.customMedia;
     }
 
     if (options?.fluid) {

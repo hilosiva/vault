@@ -1,0 +1,8 @@
+:where(html) {
+  font-family: var(--base-font-family, sans-serif);
+  line-height: var(--base-line-height, 1.5);
+  color: var(--base-color);
+  background-color: var(--base-background-color);
+  color-scheme: light dark;
+  -webkit-font-smoothing: antialiased;
+}

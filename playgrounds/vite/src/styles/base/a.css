@@ -1,0 +1,3 @@
+:where(:any-link) {
+  text-underline-offset: 0.25em;
+}

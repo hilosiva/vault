@@ -1,6 +1,6 @@
 {
   "name": "vaultcss",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "Unlock the Power of CSS",
   "license": "MIT",
   "author": "Shibata Hironori",
@@ -15,7 +15,11 @@
   },
   "bugs": "https://github.com/hilosiva/vault/issues",
   "homepage": "https://github.com/hilosiva/vault",
+  "bin": {
+    "vaultcss": "./dist/cli.mjs"
+  },
   "scripts": {
+    "prebuild": "node -e \"require('fs').rmSync('./dist', {recursive:true,force:true})\"",
     "build": "tsup-node --env.NODE_ENV production",
     "dev": "tsup-node --env.NODE_ENV development --watch",
     "test": "vitest"
@@ -23,7 +27,7 @@
   "exports": {
     ".": {
       "style": "./dist/index.css",
-      "types": "./dist/index.d.mts",
+      "types": "./dist/index.d.ts",
       "require": "./dist/index.js",
       "import": "./dist/index.mjs"
     },
@@ -32,23 +36,31 @@
     "./index": "./dist/index.css",
     "./mediaqueries.css": "./dist/mediaqueries.css",
     "./mediaqueries": "./dist/mediaqueries.css",
-    "./variables.css": "./dist/variables.css",
-    "./variables": "./dist/variables.css",
-    "./reset.css": "./dist/reset.css",
-    "./reset": "./dist/reset.css",
-    "./container.css": "./dist/container.css",
-    "./container": "./dist/container.css",
-    "./grid.css": "./dist/grid.css",
-    "./grid": "./dist/grid.css",
-    "./spacer.css": "./dist/spacer.css",
-    "./spacer": "./dist/spacer.css"
+    "./tokens/tokens.css": "./dist/tokens/tokens.css",
+    "./tokens/tokens": "./dist/tokens/tokens.css",
+    "./reset/reset.css": "./dist/reset/reset.css",
+    "./reset/reset": "./dist/reset/reset.css",
+    "./base/html.css": "./dist/base/html.css",
+    "./base/html": "./dist/base/html.css",
+    "./base/a.css": "./dist/base/a.css",
+    "./base/a": "./dist/base/a.css",
+    "./base/hn.css": "./dist/base/hn.css",
+    "./base/hn": "./dist/base/hn.css",
+    "./components/container.css": "./dist/components/container.css",
+    "./components/container": "./dist/components/container.css",
+    "./components/grid.css": "./dist/components/grid.css",
+    "./components/grid": "./dist/components/grid.css",
+    "./components/spacer.css": "./dist/components/spacer.css",
+    "./components/spacer": "./dist/components/spacer.css",
+    "./utilities/utilities.css": "./dist/utilities/utilities.css",
+    "./utilities/utilities": "./dist/utilities/utilities.css"
   },
   "publishConfig": {
     "provenance": false,
     "access": "public",
     "exports": {
       ".": {
-        "types": "./dist/index.d.mts",
+        "types": "./dist/index.d.ts",
         "style": "./dist/index.css",
         "require": "./dist/index.js",
         "import": "./dist/index.mjs"
@@ -58,16 +70,24 @@
       "./index": "./dist/index.css",
       "./mediaqueries.css": "./dist/mediaqueries.css",
       "./mediaqueries": "./dist/mediaqueries.css",
-      "./variables.css": "./dist/variables.css",
-      "./variables": "./dist/variables.css",
-      "./reset.css": "./dist/reset.css",
-      "./reset": "./dist/reset.css",
-      "./container.css": "./dist/container.css",
-      "./container": "./dist/container.css",
-      "./grid.css": "./dist/grid.css",
-      "./grid": "./dist/grid.css",
-      "./spacer.css": "./dist/spacer.css",
-      "./spacer": "./dist/spacer.css"
+      "./tokens/tokens.css": "./dist/tokens/tokens.css",
+      "./tokens/tokens": "./dist/tokens/tokens.css",
+      "./reset/reset.css": "./dist/reset/reset.css",
+      "./reset/reset": "./dist/reset/reset.css",
+      "./base/html.css": "./dist/base/html.css",
+      "./base/html": "./dist/base/html.css",
+      "./base/a.css": "./dist/base/a.css",
+      "./base/a": "./dist/base/a.css",
+      "./base/hn.css": "./dist/base/hn.css",
+      "./base/hn": "./dist/base/hn.css",
+      "./components/container.css": "./dist/components/container.css",
+      "./components/container": "./dist/components/container.css",
+      "./components/grid.css": "./dist/components/grid.css",
+      "./components/grid": "./dist/components/grid.css",
+      "./components/spacer.css": "./dist/components/spacer.css",
+      "./components/spacer": "./dist/components/spacer.css",
+      "./utilities/utilities.css": "./dist/utilities/utilities.css",
+      "./utilities/utilities": "./dist/utilities/utilities.css"
     }
   },
   "style": "dist/index.css",
@@ -81,10 +101,13 @@
     "vitest": "^2.0.5"
   },
   "dependencies": {
-    "@hilosiva/oreset": "^3.0.2",
+    "@hilosiva/oreset": "^4.0.0",
+    "@inquirer/prompts": "5.1.2",
     "browserslist": "^4.24.4",
+    "kolorist": "^1.8.0",
     "lightningcss": "^1.30.1",
     "lightningcss-plugin-fluid": "^0.0.7",
+    "ora": "^9.3.0",
     "prettier": "^3.3.3"
   }
 }

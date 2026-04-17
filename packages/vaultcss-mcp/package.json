@@ -1,33 +1,36 @@
 {
-  "name": "vite-plugin-vaultcss",
-  "version": "0.3.0",
-  "description": "Unlock the Power of CSS",
+  "name": "vaultcss-mcp",
+  "version": "0.1.0",
+  "description": "MCP server for vaultcss ecosystem",
   "license": "MIT",
   "author": "Shibata Hironori",
   "keywords": [
-    "Vite",
     "CSS",
-    "CSS Framework"
+    "MCP",
+    "vaultcss"
   ],
   "repository": {
     "type": "git",
     "url": "https://github.com/hilosiva/vault.git",
-    "directory": "packages/vaultcss-vite"
+    "directory": "packages/vaultcss-mcp"
   },
   "bugs": "https://github.com/hilosiva/vault/issues",
   "homepage": "https://github.com/hilosiva/vault",
+  "bin": {
+    "vaultcss-mcp": "./dist/index.mjs"
+  },
   "scripts": {
+    "prebuild": "node -e \"require('fs').rmSync('./dist', {recursive:true,force:true})\"",
     "build": "tsup-node",
-    "dev": "pnpm run build -- --watch"
+    "dev": "tsup-node --watch"
   },
   "exports": {
     ".": {
-      "types": "./dist/index.d.mts",
       "import": "./dist/index.mjs"
     }
   },
   "files": [
-    "dist/"
+    "dist"
   ],
   "publishConfig": {
     "provenance": false,
@@ -35,11 +38,11 @@
   },
   "devDependencies": {
     "@types/node": "^22.2.0",
-    "vaultcss": "workspace:^",
-    "vite": "^5.4.0"
+    "tsup": "^8.2.4",
+    "typescript": "^5.5.4"
   },
-  "peerDependencies": {
-    "vaultcss": "^0.3.0",
-    "vite": "^5.4.0 || ^6"
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.10.2",
+    "zod": "^3.25.0"
   }
 }

@@ -31,6 +31,7 @@
 
   --base-background-color: #fff;
   --base-color: var(--color-dark);
+  --base-line-height: 1.5;
 
   /* Font Family */
   --font-sans-ja: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "BIZ UDPGothic", "Meiryo", sans-serif;
