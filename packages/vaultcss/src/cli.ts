@@ -130,22 +130,29 @@ function buildImports(selected: Map<string, string[]>): string {
 async function main(): Promise<void> {
   printBanner();
 
+  const rawArgs = process.argv.slice(2);
+  const yes = rawArgs.includes("--yes") || rawArgs.includes("-y");
+
   const cwd = process.cwd();
   const foundDirs = findStyleDirs(cwd);
 
   // 1. 出力先
-  const outDirRaw = await input({
-    message: "スタイルの出力先:",
-    default: foundDirs[0] ?? "src/styles",
-  });
+  const outDirRaw = yes
+    ? (foundDirs[0] ?? "src/styles")
+    : await input({
+        message: "スタイルの出力先:",
+        default: foundDirs[0] ?? "src/styles",
+      });
   const outDir = resolve(cwd, outDirRaw);
 
   // 2. エントリーファイル名
   const detectedEntry = findEntryFile(outDir);
-  const entryFile = await input({
-    message: "エントリーCSSファイル名:",
-    default: detectedEntry ?? "global.css",
-  });
+  const entryFile = yes
+    ? (detectedEntry ?? "global.css")
+    : await input({
+        message: "エントリーCSSファイル名:",
+        default: detectedEntry ?? "global.css",
+      });
 
   // 3. レイヤーを走査
   const layers = scanLayers();
@@ -155,48 +162,53 @@ async function main(): Promise<void> {
   }
 
   // 4. 全部 or 個別
-  const installMode = await select({
-    message: "インストールするスタイルは？:",
-    choices: [
-      { name: "全部", value: "all" },
-      { name: "個別に選ぶ", value: "select" },
-    ],
-  });
-
   const selected = new Map<string, string[]>();
 
-  if (installMode === "all") {
+  if (yes) {
+    // --yes: 全レイヤーを選択
     for (const layer of layers) selected.set(layer.name, layer.files);
   } else {
-    // レイヤー選択
-    const layerNames = await checkbox({
-      message: "含めるレイヤーを選択 (スペースで選択・Enter で確定):",
-      choices: layers.map((l) => ({
-        name: l.files.length === 0
-          ? `${l.name}  (レイヤー定義のみ)`
-          : l.files.length === 1
-            ? `${l.name}  (${l.files[0]})`
-            : `${l.name}  (${l.files.length} files)`,
-        value: l.name,
-        checked: false,
-      })),
+    const installMode = await select({
+      message: "インストールするスタイルは？:",
+      choices: [
+        { name: "全部", value: "all" },
+        { name: "個別に選ぶ", value: "select" },
+      ],
     });
 
-    // 複数ファイルのレイヤーはさらに個別選択
-    for (const name of layerNames) {
-      const layer = layers.find((l) => l.name === name)!;
-      if (layer.files.length <= 1) {
-        selected.set(name, layer.files);
-      } else {
-        const files = await checkbox({
-          message: `${name} のファイルを選択 (スペースで選択・Enter で確定):`,
-          choices: layer.files.map((f) => ({
-            name: f,
-            value: f,
-            checked: false,
-          })),
-        });
-        if (files.length > 0) selected.set(name, files);
+    if (installMode === "all") {
+      for (const layer of layers) selected.set(layer.name, layer.files);
+    } else {
+      // レイヤー選択
+      const layerNames = await checkbox({
+        message: "含めるレイヤーを選択 (スペースで選択・Enter で確定):",
+        choices: layers.map((l) => ({
+          name: l.files.length === 0
+            ? `${l.name}  (レイヤー定義のみ)`
+            : l.files.length === 1
+              ? `${l.name}  (${l.files[0]})`
+              : `${l.name}  (${l.files.length} files)`,
+          value: l.name,
+          checked: false,
+        })),
+      });
+
+      // 複数ファイルのレイヤーはさらに個別選択
+      for (const name of layerNames) {
+        const layer = layers.find((l) => l.name === name)!;
+        if (layer.files.length <= 1) {
+          selected.set(name, layer.files);
+        } else {
+          const files = await checkbox({
+            message: `${name} のファイルを選択 (スペースで選択・Enter で確定):`,
+            choices: layer.files.map((f) => ({
+              name: f,
+              value: f,
+              checked: false,
+            })),
+          });
+          if (files.length > 0) selected.set(name, files);
+        }
       }
     }
   }
@@ -217,8 +229,9 @@ async function main(): Promise<void> {
   if (hasMediaqueries && existsSync(mediaqueriesDest)) conflictFiles.push("tokens/mediaqueries.css");
   if (existsSync(entryPath)) conflictFiles.push(entryFile);
 
+  // --yes の場合は常に上書き
   let overwriteMode: "overwrite" | "skip" | "cancel" = "overwrite";
-  if (conflictFiles.length > 0) {
+  if (!yes && conflictFiles.length > 0) {
     console.log(`\n${yellow("以下のファイルはすでに存在します:")}`);
     conflictFiles.forEach((f) => console.log(`  ${f}`));
     console.log();
