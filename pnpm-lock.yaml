@@ -66,8 +66,8 @@ importers:
         specifier: ^1.30.1
         version: 1.30.1
       lightningcss-plugin-fluid:
-        specifier: ^0.0.7
-        version: 0.0.7
+        specifier: ^0.1.1
+        version: 0.1.1
       ora:
         specifier: ^9.3.0
         version: 9.3.0
@@ -2148,8 +2148,8 @@ packages:
     cpu: [x64]
     os: [linux]
 
-  lightningcss-plugin-fluid@0.0.7:
-    resolution: {integrity: sha512-nLtMBAJXAe1/Syw2VHAm/UdHvQjrgt6iYxMIlQlZ4GVwImL8bmFhQpVA2QW4+EHAFZYHRaMTDdu20xPoI/uEPg==}
+  lightningcss-plugin-fluid@0.1.1:
+    resolution: {integrity: sha512-SEyymmJ3RGT92K+F6mX+z+1gG7fIqwG6kEU7NDtqfttKLnQzjYTy9YYVOpnAelfmQXkgRYGhdMeL3Xc0q1RuCw==}
 
   lightningcss-win32-arm64-msvc@1.30.1:
     resolution: {integrity: sha512-mSL4rqPi4iXq5YVqzSsJgMVFENoa4nGTT/GjO2c0Yl9OuQfPsIfncvLrEW6RbbB24WtZ3xP/2CCmI3tNkNV4oA==}
@@ -5564,7 +5564,7 @@ snapshots:
   lightningcss-linux-x64-musl@1.30.1:
     optional: true
 
-  lightningcss-plugin-fluid@0.0.7: {}
+  lightningcss-plugin-fluid@0.1.1: {}
 
   lightningcss-win32-arm64-msvc@1.30.1:
     optional: true
