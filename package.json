@@ -16,7 +16,8 @@
     "version:minor": "pnpm version minor --filter='packages/*' --force --no-git-tag-version",
     "version:major": "pnpm version major --filter='packages/*' --force --no-git-tag-version",
     "publish:main": "pnpm --filter=!./playgrounds/* publish",
-    "publish:beta": "pnpm --filter=!./playgrounds/* publish --tag beta"
+    "publish:beta": "pnpm --filter=!./playgrounds/* publish --tag beta",
+    "check:vite7": "pnpm run --filter=./playgrounds/vite build"
   },
   "repository": {
     "type": "git",
@@ -38,5 +39,8 @@
     "typescript": "^5.5.4",
     "vitest": "^2.0.5"
   },
-  "packageManager": "pnpm@9.7.0"
+  "packageManager": "pnpm@9.7.0",
+  "volta": {
+    "node": "22.12.0"
+  }
 }
