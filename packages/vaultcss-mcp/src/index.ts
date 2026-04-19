@@ -308,25 +308,16 @@ Ctrl+C → pnpm dev
 \`\`\`
 `;
 
-const FLUID_GUIDE = `# vaultcss fluid ガイド
+const FLUID_GUIDE = `# vaultcss fluid 設定ガイド
 
 ## 概要
 
-\`fluid()\` 関数を CSS に書くと、自動で \`clamp()\` に変換されるプラグイン（lightningcss-plugin-fluid）。
-ビューポート幅に応じてサイズが滑らかに変化するレスポンシブ指定を、シンプルな構文で記述できます。
+\`fluid()\` / \`fluid-free()\` 関数を CSS に書くと自動で \`clamp()\` / \`max()\` に変換されます（lightningcss-plugin-fluid）。
+構文・引数・unit の詳細は \`lightningcss-plugins-mcp\` の \`get_fluid_functions\` を参照してください。
 
-\`\`\`css
-/* 書く */
-font-size: fluid(24px 40px);
-
-/* コンパイル後 */
-font-size: clamp(1.5rem, 1.25728rem + 1.0356vi, 2.5rem);
-\`\`\`
-
-## vite-plugin-vaultcss での設定
+## vite-plugin-vaultcss での設定（vite.config.ts）
 
 \`\`\`ts
-// vite.config.ts
 import { defineConfig } from "vite";
 import vaultcss from "vite-plugin-vaultcss";
 
@@ -337,49 +328,33 @@ export default defineConfig({
         minViewPort: 375,   // デフォルト: 375
         maxViewPort: 1920,  // デフォルト: 1920
         baseFontSize: 16,   // デフォルト: 16
-        unit: "vi",         // "vi" | "vw" | "cqw" | "cqi"（デフォルト: "vi"）
+        unit: "vi",         // "vi" | "vw" | "vh" | "vb" | "cqw" | "cqi"（デフォルト: "vi"）
       },
     }),
   ],
 });
 \`\`\`
 
-## CSS での使い方
+## astro.config.ts での設定
 
-構文: \`fluid(最小値 最大値)\` または \`fluid(最小値 最大値 最小VP 最大VP)\`
+\`\`\`ts
+import { defineConfig } from "astro/config";
+import vaultcss from "vite-plugin-vaultcss";
 
-- 最小値・最大値: \`px\` または \`rem\`（必須）
-- 最小VP・最大VP: \`px\`（省略時はオプションの \`minViewPort\` / \`maxViewPort\` の値を使用）
-
-\`\`\`css
-/* シンプル（VP はオプション値を使用） */
-font-size: fluid(24px 40px);
-
-/* VP を個別に指定 */
-font-size: fluid(24px 40px 768px 1024px);
-
-/* rem 指定 */
-margin-block: fluid(2.5rem 4rem);
-
-/* 複数値（margin-block の start / end を個別指定） */
-margin-block: fluid(2.5rem 4rem) fluid(24px 32px 768px 1024px);
-
-/* CSS カスタムプロパティ（単位なし px 値として扱われる） */
-:root {
-  --font-sm: 14;
-  --font-lg: 20;
-}
-font-size: fluid(var(--font-sm) var(--font-lg));
+export default defineConfig({
+  vite: {
+    plugins: [
+      vaultcss({
+        fluid: {
+          minViewPort: 375,
+          maxViewPort: 1920,
+          unit: "vi",
+        },
+      }),
+    ],
+  },
+});
 \`\`\`
-
-## unit オプションの違い
-
-| 値 | 基準 | 用途 |
-|---|---|---|
-| \`vi\` | インラインサイズ（論理プロパティ） | 通常はこれ（デフォルト） |
-| \`vw\` | ビューポート幅 | 従来の書き方 |
-| \`cqw\` | コンテナクエリ幅 | コンテナ内の要素 |
-| \`cqi\` | コンテナクエリインライン | コンテナ内・論理プロパティ |
 
 ## fluidOptions 一覧
 
@@ -388,7 +363,7 @@ font-size: fluid(var(--font-sm) var(--font-lg));
 | \`minViewPort\` | \`number\` | \`375\` | 最小ビューポート幅（px） |
 | \`maxViewPort\` | \`number\` | \`1920\` | 最大ビューポート幅（px） |
 | \`baseFontSize\` | \`number\` | \`16\` | rem 計算の基準フォントサイズ（px） |
-| \`unit\` | \`"vi" \\| "vw" \\| "cqw" \\| "cqi"\` | \`"vi"\` | clamp の相対単位 |
+| \`unit\` | \`"vi" \\| "vw" \\| "vh" \\| "vb" \\| "cqw" \\| "cqi"\` | \`"vi"\` | clamp の相対単位 |
 `;
 
 const VAULTSCRIPT_LIBS_GUIDE = `# vaultscript ライブラリ & ユーティリティ
