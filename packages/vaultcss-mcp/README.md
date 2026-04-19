@@ -2,6 +2,10 @@
 
 MCP server for the vaultcss ecosystem — brings setup guides, layer references, and project breakpoints into Claude Code, Cursor, and any MCP-compatible AI editor.
 
+## Requirements
+
+- **Node.js**: 20.19.0 以上（22.12.0 以上推奨）
+
 ## Overview
 
 `vaultcss-mcp` runs as a stdio MCP server. On startup it reads the project's `package.json` and registers only the tools that match what is installed. If no vault packages are detected, all tools are registered as a fallback.

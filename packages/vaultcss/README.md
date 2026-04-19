@@ -10,6 +10,10 @@ npm install vaultcss
 pnpm add vaultcss
 ```
 
+## Requirements
+
+- **Node.js**: 20.19.0 以上（22.12.0 以上推奨）
+
 ---
 
 ## Features

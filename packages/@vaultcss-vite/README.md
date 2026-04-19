@@ -13,10 +13,13 @@ A Vite plugin that integrates [vaultcss](https://github.com/hilosiva/vault) into
 
 ## Requirements
 
+- **Node.js**: 20.19.0 以上（22.12.0 以上推奨）
+- **Vite**: 6.x または 7.x
+
 | Peer Dependency | Version |
 |-----------------|---------|
 | `vaultcss` | `^0.3.0` |
-| `vite` | `^5.4.0 \|\| ^6` |
+| `vite` | `^6 \|\| ^7` |
 
 ## Installation
 
