@@ -585,7 +585,7 @@ function detectInstalledPackages(cwd: string): InstalledPackages {
 
 const server = new McpServer({
   name: "vaultcss-mcp",
-  version: "0.1.2",
+  version: "0.1.3",
 });
 
 const TOOL_ANNOTATIONS = {
