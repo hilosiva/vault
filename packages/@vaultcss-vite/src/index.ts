@@ -2,7 +2,7 @@ import { VaultCss } from "vaultcss";
 import type { PluginOptions as vaultOptions } from "vaultcss";
 import type { Plugin, ResolvedConfig } from "vite";
 import { normalizePath } from "vite";
-import { existsSync, readFileSync, readdirSync } from "fs";
+import { existsSync, readFileSync, readdirSync, type Dirent } from "fs";
 import { join } from "path";
 
 // vaultcss init が生成する mediaqueries.css に付与するマーカー
@@ -34,7 +34,7 @@ function findVaultMediaQueriesFile(root: string): MediaQueriesFile | null {
 
   function scan(dir: string, depth: number): { path: string; content: string } | null {
     if (depth > 3) return null;
-    let entries: ReturnType<typeof readdirSync>;
+    let entries: Dirent<string>[];
     try { entries = readdirSync(dir, { withFileTypes: true }); } catch { return null; }
 
     for (const entry of entries) {

@@ -189,7 +189,7 @@
   vertical-align: unset;
 }
 
-:where(::placeholder) {
+:where(:is(input, textarea))::placeholder {
   opacity: unset;
 }
 

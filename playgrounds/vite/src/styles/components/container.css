@@ -12,3 +12,11 @@
   padding-inline: var(--offset);
   margin-inline: auto;
 }
+
+p {
+  background-color: #eee;
+
+  @media (--md) {
+    background-color: #000;
+  }
+}

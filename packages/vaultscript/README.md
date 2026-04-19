@@ -6,7 +6,13 @@ A collection of UI utilities and components for modern web development.
 
 ```bash
 npm install vaultscript
+# or
+pnpm add vaultscript
 ```
+
+## Requirements
+
+- **Node.js**: 20.19.0 以上（22.12.0 以上推奨）
 
 ---
 

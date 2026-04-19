@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-vaultcss",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Unlock the Power of CSS",
   "license": "MIT",
   "author": "Shibata Hironori",
@@ -34,12 +34,12 @@
     "access": "public"
   },
   "devDependencies": {
-    "@types/node": "^22.2.0",
+    "@types/node": "^22.12.0",
     "vaultcss": "workspace:^",
-    "vite": "^5.4.0"
+    "vite": "^7.3.2"
   },
   "peerDependencies": {
     "vaultcss": "^0.3.0",
-    "vite": "^5.4.0 || ^6"
+    "vite": "^6 || ^7"
   }
 }

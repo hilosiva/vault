@@ -8,10 +8,18 @@ A monorepo of CSS and JavaScript packages for modern web development, powered by
 
 | Package | Version | Description |
 |---------|---------|-------------|
-| [`vaultcss`](./packages/vaultcss) | `0.3.1` | CSS compiler, CLI, and layered stylesheet collection |
-| [`vite-plugin-vaultcss`](./packages/@vaultcss-vite) | `0.3.1` | Vite plugin integrating vaultcss with HMR and `fluid()` support |
+| [`vaultcss`](./packages/vaultcss) | `0.3.3` | CSS compiler, CLI, and layered stylesheet collection |
+| [`vite-plugin-vaultcss`](./packages/@vaultcss-vite) | `0.3.2` | Vite plugin integrating vaultcss with HMR and `fluid()` support |
 | [`vaultscript`](./packages/vaultscript) | `0.2.4` | UI component library — modals, smooth scroll, toggles, and more |
-| [`vaultcss-mcp`](./packages/vaultcss-mcp) | `0.1.2` | MCP server that brings vaultcss docs into Claude Code and Cursor |
+| [`vaultcss-mcp`](./packages/vaultcss-mcp) | `0.1.3` | MCP server that brings vaultcss docs into Claude Code and Cursor |
+
+---
+
+## Requirements
+
+- **Node.js**: 20.19.0 以上（22.12.0 以上推奨）
+- **Vite**: 6.x または 7.x（`vite-plugin-vaultcss` 使用時）
+- **パッケージマネージャー**: pnpm 推奨
 
 ---
 
