@@ -19,7 +19,7 @@ pnpm add vaultcss
 ## Features
 
 - **LightningCSS compiler** — transforms modern CSS for your target browsers
-- **`fluid()` → `clamp()` conversion** — fluid typography and spacing via [lightningcss-plugin-fluid](https://github.com/nicholasgasior/lightningcss-plugin-fluid)
+- **`fluid()` → `clamp()` conversion** — fluid typography and spacing via [lightningcss-plugin-fluid](https://github.com/hilosiva/lightningcss-plugins) v0.2+（`snap` / `fit` / `free-max` / `free-min` / `free` キーワード対応）
 - **`@custom-media` expansion** — draft spec resolved at compile time
 - **Layered stylesheets** — ready-to-use CSS files structured around `@layer`
 - **`vaultcss init` CLI** — scaffolds a layer-based CSS file structure into your project
@@ -105,7 +105,7 @@ const formatted = await vault.compiler(css);
 | Option | Type | Description |
 |--------|------|-------------|
 | `targets` | `string \| string[]` | [browserslist](https://browsersl.ist/) query. Defaults to `"defaults"` |
-| `fluid` | `fluidOptions` | Options passed to `lightningcss-plugin-fluid` |
+| `fluid` | `fluidOptions` | Options passed to `lightningcss-plugin-fluid`. `minCompSize` / `maxCompSize` / `mode: "snap"` でスナップモードを制御できます |
 | `minify` | `boolean` | Minify output. Default: `false` |
 | `customMedia` | `Record<string, string>` | Additional or overriding `@custom-media` definitions |
 
