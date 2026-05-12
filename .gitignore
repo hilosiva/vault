@@ -27,3 +27,4 @@ dist-ssr
 .turbo
 test-results/
 .debug
+.claude
