@@ -312,8 +312,24 @@ const FLUID_GUIDE = `# vaultcss fluid 設定ガイド
 
 ## 概要
 
-\`fluid()\` / \`fluid-free()\` 関数を CSS に書くと自動で \`clamp()\` / \`max()\` に変換されます（lightningcss-plugin-fluid）。
-構文・引数・unit の詳細は \`lightningcss-plugins-mcp\` の \`get_fluid_functions\` を参照してください。
+CSS に \`fluid()\` を書くと自動で \`clamp()\` / \`max()\` / \`min()\` / \`calc()\` に変換されます（lightningcss-plugin-fluid v0.2+）。
+キーワード引数でモードを切り替えられます。構文・引数の詳細は \`lightningcss-plugins-mcp\` の \`get_fluid_functions\` を参照してください。
+
+## CSS での使い方
+
+\`\`\`css
+/* 基本（clamp 出力） */
+font-size: fluid(16px 24px);
+
+/* snap モード: カンプサイズ基準で外挿 */
+font-size: fluid(40px 80px, snap);
+
+/* 上限なし */
+font-size: fluid(24px 48px, free-max);
+
+/* global snap 時に classic に戻す */
+font-size: fluid(16px 24px, fit);
+\`\`\`
 
 ## vite-plugin-vaultcss での設定（vite.config.ts）
 
@@ -325,10 +341,13 @@ export default defineConfig({
   plugins: [
     vaultcss({
       fluid: {
-        minViewPort: 375,   // デフォルト: 375
-        maxViewPort: 1920,  // デフォルト: 1920
-        baseFontSize: 16,   // デフォルト: 16
+        minViewPort: 375,   // 対応幅の最小（px）、デフォルト: 375
+        maxViewPort: 1920,  // 対応幅の最大（px）、デフォルト: 1920
+        baseFontSize: 16,   // px → rem 変換の基準、デフォルト: 16
         unit: "vi",         // "vi" | "vw" | "vh" | "vb" | "cqw" | "cqi"（デフォルト: "vi"）
+        minCompSize: 440,   // snap モード: カンプ最小幅（px）、デフォルト: 440
+        maxCompSize: 1440,  // snap モード: カンプ最大幅（px）、デフォルト: 1440
+        mode: "snap",       // 全体を snap モードに。省略時は inline snap キーワードのみ有効
       },
     }),
   ],
@@ -349,6 +368,8 @@ export default defineConfig({
           minViewPort: 375,
           maxViewPort: 1920,
           unit: "vi",
+          minCompSize: 440,
+          maxCompSize: 1440,
         },
       }),
     ],
@@ -360,10 +381,13 @@ export default defineConfig({
 
 | オプション | 型 | デフォルト | 説明 |
 |---|---|---|---|
-| \`minViewPort\` | \`number\` | \`375\` | 最小ビューポート幅（px） |
-| \`maxViewPort\` | \`number\` | \`1920\` | 最大ビューポート幅（px） |
-| \`baseFontSize\` | \`number\` | \`16\` | rem 計算の基準フォントサイズ（px） |
-| \`unit\` | \`"vi" \\| "vw" \\| "vh" \\| "vb" \\| "cqw" \\| "cqi"\` | \`"vi"\` | clamp の相対単位 |
+| \`minViewPort\` | \`number\` | \`375\` | 対応ブラウザの最小ビューポート幅（px） |
+| \`maxViewPort\` | \`number\` | \`1920\` | 対応ブラウザの最大ビューポート幅（px） |
+| \`baseFontSize\` | \`number\` | \`16\` | px → rem 変換の基準フォントサイズ |
+| \`unit\` | \`"vi" \\| "vw" \\| "vh" \\| "vb" \\| "cqw" \\| "cqi"\` | \`"vi"\` | 流体スケーリングに使う単位 |
+| \`minCompSize\` | \`number\` | \`440\` | snap モードのカンプ最小幅（px） |
+| \`maxCompSize\` | \`number\` | \`1440\` | snap モードのカンプ最大幅（px） |
+| \`mode\` | \`"snap" \\| undefined\` | \`undefined\` | \`"snap"\` で全体をスナップモードに |
 `;
 
 const VAULTSCRIPT_LIBS_GUIDE = `# vaultscript ライブラリ & ユーティリティ
